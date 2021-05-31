@@ -37,7 +37,6 @@ barbers.get().then((doc) => {
                 serviceDescription = barberServices["service"+i]["service"+i+"Description"];
                 servicePrice = barberServices["service"+i]["service"+i+"Price"];
               }
-            loader.classList.add("hidden");
           }
           // console.log([key]);
           updateProfile();
@@ -56,6 +55,8 @@ barbers.get().then((doc) => {
 
 function updateProfile()
 {  
+  loader.classList.add("hidden");
+
   // let barberName = localStorage.getItem("barberName");
   // let barberImageSrc = localStorage.getItem("barberImageSrc");
   // let barberServices = localStorage.getItem("barberServices");
