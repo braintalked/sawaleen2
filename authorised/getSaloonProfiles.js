@@ -2,6 +2,8 @@
 console.log("inside getSaloonProfiles.js file")
 
 //////////////////////// START DATA FETCHING ///////////////////////////
+          const loader = document.querySelector(".loadingAnimation");
+          loader.classList.remove("hidden");
 
     var barbers = db.collection("saloons").doc("Saloon Profiles");
 
@@ -19,6 +21,7 @@ console.log("inside getSaloonProfiles.js file")
             console.log( key, data[key] );
             newBarberCard(name,province,city,barberID,services)
           }
+          loader.classList.add("hidden");
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
