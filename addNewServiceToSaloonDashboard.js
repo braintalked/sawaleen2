@@ -1,0 +1,212 @@
+//////////////////////// STAET DATA FETCHING ///////////////////////////
+
+var saloons = db.collection("saloons").doc("Saloon Profiles");
+
+saloons.get().then((doc) => {
+    if (doc.exists) {
+      let barberServices = [];
+      var data = doc.data()
+      for (var key in data)
+      {
+        if([key] == localStorage.getItem("barberID"))
+        {
+          barberServices = data[key]["services"];
+        }
+       
+      }
+    updateProfileServices(barberServices);
+      
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+}).catch((error) => {
+    console.log("Error getting document:", error);
+});
+//////////////////////// EDN OF DATA FETCHING ///////////////////////////
+
+document.querySelector("#addServiceButton").addEventListener("click", addNewService);
+document.getElementById("serviceDescription").addEventListener("change", getSelectedServicedDecription);
+document.getElementById("servicePrice").addEventListener("change", getSelectedServicePrice);
+
+function getSelectedServicedDecription()
+{
+  var selectedServiceDecription = document.getElementById("serviceDescription");
+  var serviceValue = selectedServiceDecription.options[selectedServiceDecription.selectedIndex].value;
+  var serviceText = selectedServiceDecription.options[selectedServiceDecription.selectedIndex].text;
+  return serviceText;
+}
+
+function getSelectedServicePrice()
+{
+  var selectedServicePrice = document.getElementById("servicePrice");
+  var priceValue = selectedServicePrice.options[selectedServicePrice.selectedIndex].value;
+  var priceText = selectedServicePrice.options[selectedServicePrice.selectedIndex].text;
+  return priceText;
+}
+
+function updateProfileServices(barberServices)
+{
+  // console.log(barberServices);
+  // console.log(barberServices);
+
+  let numberOfexistingServices = Object.keys(barberServices).length;
+  for (i=1; i<=numberOfexistingServices; i++)
+  {
+    console.log(barberServices["service"+i]);
+  }
+  // let tr = document.createElement("tr");
+  //     let td1 = document.createElement("td");
+  //     let td2 = document.createElement("td");
+  //     let td3 = document.createElement("td");
+  //     let button = document.createElement("button");
+
+  //     button.type = 'button';
+  //     button.id = "removeServiceButton";
+  //     button.style.backgroundColor = "red";
+  //     button.style.width = "20px";
+  //     button.style.height = "20px";
+  //     button.style.background = "url('assets/img/remove.png') no-repeat";
+  //     td1.innerText =""+getSelectedServicedDecription();
+  //     td2.innerText = ""+getSelectedServicePrice();
+  //     tr.classList.add("serviceTableRow");
+  //     td1.classList.add("serviceCell");
+  //     td2.classList.add("priceCell");
+
+  //     td3.appendChild(button);
+  //     tr.appendChild(td1);
+  //     tr.appendChild(td2);
+  //     tr.appendChild(td3);
+  //     function removeService()
+  //       {
+  //         tr.classList.add("d-none");
+  //         tr.classList.remove("serviceTableRow");
+  //         i = i -1;
+  //       }
+  //     function insertAfter(referenceNode, newNode)
+  //     {
+  //       referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  //     }
+
+  //     var appendingElement = document.getElementById("appendServicesAfterThisRow")
+  //     insertAfter(appendingElement,tr);
+}
+
+let i = 1;
+function addNewService()
+{
+  console.log("inside addNewService...");
+  if (i<=20)
+  {
+      let tr = document.createElement("tr");
+      let td1 = document.createElement("td");
+      let td2 = document.createElement("td");
+      let td3 = document.createElement("td");
+      let button = document.createElement("button");
+
+      button.type = 'button';
+      button.id = "removeServiceButton";
+      button.style.backgroundColor = "red";
+      button.style.width = "20px";
+      button.style.height = "20px";
+      button.style.background = "url('assets/img/remove.png') no-repeat";
+      td1.innerText =""+getSelectedServicedDecription();
+      td2.innerText = ""+getSelectedServicePrice();
+      tr.classList.add("serviceTableRow");
+      td1.classList.add("serviceCell");
+      td2.classList.add("priceCell");
+
+      td3.appendChild(button);
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+      function removeService()
+        {
+          tr.classList.add("d-none");
+          tr.classList.remove("serviceTableRow");
+          i = i -1;
+        }
+      function insertAfter(referenceNode, newNode)
+      {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+      }
+
+      var appendingElement = document.getElementById("appendServicesAfterThisRow")
+      insertAfter(appendingElement,tr);
+
+      i = i + 1;
+  }
+  document.getElementById("removeServiceButton").addEventListener('click',removeService);
+
+}
+
+////////////////// Start of Sending Services To Database //////////////
+
+document.getElementById("saveSaloonProfileServices").addEventListener("click", sendServicesToDatabase);
+
+function sendServicesToDatabase()
+{
+  let serviceTableRowCollection = [];
+  document.querySelectorAll(".serviceTableRow").forEach(appednToServiceTableRowsCollection);
+  let serviceDescriptionAndPrice = {};
+  let saloonServices = {};
+  let saloonServicesToDatabase = {};
+
+  function appednToServiceTableRowsCollection(item)
+  {
+    serviceTableRowCollection.push(item);
+  }
+  for(i=0;i<serviceTableRowCollection.length;i++)
+  {
+    // console.log(serviceTableRowCollection[i].querySelector(".serviceCell").innerText)
+    // console.log(serviceTableRowCollection[i].querySelector(".priceCell").innerText)
+    // saloonServices["service"+(i+1)] = serviceTableRowCollection[i].querySelector(".serviceCell").innerText;
+    serviceDescriptionAndPrice["service"+(i+1)+"Description"] = serviceTableRowCollection[i].querySelector(".serviceCell").innerText;
+    serviceDescriptionAndPrice["service"+(i+1)+"Price"] = serviceTableRowCollection[i].querySelector(".priceCell").innerText;
+    saloonServices["service"+(i+1)] = serviceDescriptionAndPrice;
+    serviceDescriptionAndPrice = {};
+  }
+  console.log(saloonServices);
+  saloonServicesToDatabase["services"] = saloonServices;
+  console.log("To Database :"+saloonServicesToDatabase);
+
+    let saloonID = firebase.auth().currentUser.uid;
+    console.log(saloonID);
+
+    var saloonRef = db.collection('saloons').doc('Saloon Profiles').set({
+      [saloonID] : {"services": null}
+    }, { merge: true });
+
+    var saloonRef = db.collection('saloons').doc('Saloon Profiles').set({
+      [saloonID] : saloonServicesToDatabase
+    }, { merge: true });
+}
+////////////////// End of Sending Services To Database //////////////
+
+// document.querySelector("#bookingButton").addEventListener("click", function()
+//   {
+//     console.log("button clicked");
+//     clientName = document.querySelector("#clientName").value;
+//     console.log("name: "+clientName);
+//     clientPhone = document.querySelector("#clientPhone").value;
+//     console.log("phone: "+clientPhone);
+//     clientOrder ={clientName:clientName, clientPhone:clientPhone,clientRequestedServices:clientRequestedServices};
+//     console.log(clientOrder);
+
+//       let clientID = uuidv4();
+//       let barberProfile = {};
+
+//       let key = clientID;
+//       let newClient = {};
+//       newClient[key]= clientOrder;
+//       let clients = {clients:newClient};
+
+//       var cityRef = db.collection('saloons').doc('Saloon Profiles').set({
+//         [barberID] : clients
+//       }, { merge: true });
+
+//       // var setWithMerge = cityRef.set({
+//       //     capital: true
+//       // }, { merge: true });
+
+//   }
