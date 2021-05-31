@@ -13,6 +13,9 @@ let servicePrice = "";
 
 let isEmpty = false; // to be checked later...
 
+const loader = document.querySelector(".loadingAnimation");
+loader.classList.remove("hidden");
+
 var barbers = db.collection("saloons").doc("Saloon Profiles");
 
 barbers.get().then((doc) => {
@@ -34,6 +37,7 @@ barbers.get().then((doc) => {
                 serviceDescription = barberServices["service"+i]["service"+i+"Description"];
                 servicePrice = barberServices["service"+i]["service"+i+"Price"];
               }
+            loader.classList.add("hidden");
           }
           // console.log([key]);
           updateProfile();
