@@ -47,54 +47,67 @@ function getSelectedServicePrice()
 
 function updateProfileServices(barberServices)
 {
+
   // console.log(barberServices);
   // console.log(barberServices);
 
   let numberOfexistingServices = Object.keys(barberServices).length;
+  let existingServiceDescription= "";
+  let existingServicePrice = "";
+
   for (i=1; i<=numberOfexistingServices; i++)
   {
-    console.log(barberServices["service"+i]);
+      existingServiceDescription= barberServices["service"+i]["service"+i+"Description"];
+      existingServicePrice = barberServices["service"+i]["service"+i+"Price"];
+
+      let tr = document.createElement("tr");
+      let td1 = document.createElement("td");
+      let td2 = document.createElement("td");
+      let td3 = document.createElement("td");
+      let button = document.createElement("button");
+
+      button.type = 'button';
+      button.id = "removeServiceButton";
+      button.style.backgroundColor = "red";
+      button.style.width = "20px";
+      button.style.height = "20px";
+      td1.style.textAlign = "right";
+      td1.style.paddingRight = "5px";
+      td2.style.textAlign = "center";
+      button.style.background = "url('assets/img/remove.png') no-repeat";
+      td1.innerText =""+existingServiceDescription;
+      td2.innerText = ""+existingServicePrice;
+      tr.classList.add("serviceTableRow");
+      td1.classList.add("serviceCell");
+      td2.classList.add("priceCell");
+
+      td3.appendChild(button);
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+      function removeService()
+        {
+          tr.classList.add("d-none");
+          tr.classList.remove("serviceTableRow");
+          // i = i-1;
+        }
+      function insertAfter(referenceNode, newNode)
+      {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+      }
+
+      var appendingElement = document.getElementById("appendServicesAfterThisRow")
+      insertAfter(appendingElement,tr);
+      document.getElementById("removeServiceButton").addEventListener('click',removeService);
+
   }
-  // let tr = document.createElement("tr");
-  //     let td1 = document.createElement("td");
-  //     let td2 = document.createElement("td");
-  //     let td3 = document.createElement("td");
-  //     let button = document.createElement("button");
-
-  //     button.type = 'button';
-  //     button.id = "removeServiceButton";
-  //     button.style.backgroundColor = "red";
-  //     button.style.width = "20px";
-  //     button.style.height = "20px";
-  //     button.style.background = "url('assets/img/remove.png') no-repeat";
-  //     td1.innerText =""+getSelectedServicedDecription();
-  //     td2.innerText = ""+getSelectedServicePrice();
-  //     tr.classList.add("serviceTableRow");
-  //     td1.classList.add("serviceCell");
-  //     td2.classList.add("priceCell");
-
-  //     td3.appendChild(button);
-  //     tr.appendChild(td1);
-  //     tr.appendChild(td2);
-  //     tr.appendChild(td3);
-  //     function removeService()
-  //       {
-  //         tr.classList.add("d-none");
-  //         tr.classList.remove("serviceTableRow");
-  //         i = i -1;
-  //       }
-  //     function insertAfter(referenceNode, newNode)
-  //     {
-  //       referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-  //     }
-
-  //     var appendingElement = document.getElementById("appendServicesAfterThisRow")
-  //     insertAfter(appendingElement,tr);
+  // i = numberOfexistingServices;
 }
 
-let i = 1;
 function addNewService()
 {
+  let i = 1;
+
   console.log("inside addNewService...");
   if (i<=20)
   {
@@ -124,7 +137,7 @@ function addNewService()
         {
           tr.classList.add("d-none");
           tr.classList.remove("serviceTableRow");
-          i = i -1;
+          i = i-1;
         }
       function insertAfter(referenceNode, newNode)
       {
@@ -137,7 +150,6 @@ function addNewService()
       i = i + 1;
   }
   document.getElementById("removeServiceButton").addEventListener('click',removeService);
-
 }
 
 ////////////////// Start of Sending Services To Database //////////////
