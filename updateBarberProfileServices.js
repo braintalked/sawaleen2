@@ -95,7 +95,7 @@ function updateProfile()
     // let div2 = document.createElement("div");
     // let div3 = document.createElement("div");
     // let div4 = document.createElement("div");
-
+  console.log(serviceText);
   //////////
   let div1 = document.createElement("div");
   let div2 = document.createElement("div");
@@ -137,7 +137,8 @@ function updateProfile()
     div1.className = "d-flex justify-content-end align-items-center col-xs-12 col-sm-12 col-md-12 col-lg-12 ml-auto"
     div2.className = "nameWraper ml-auto col-xs-10 col-sm-10 col-md-10 col-lg-10"
     input1.type = "checkbox"
-    input1.style.minWidth = "13px !important";
+    input1.className = "checkboxInput"
+    input1.style.width = "50px !important;";
     input1.id = "checkbox"+i;
     input1.name = "service"+i;
     label1.className = "serviceCheckbox";
