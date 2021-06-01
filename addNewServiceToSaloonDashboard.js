@@ -50,7 +50,7 @@ function updateProfileServices(barberServices)
 {
   loader.classList.add("hidden");
   loader.classList.add("d-none");
-  
+
   // console.log(barberServices);
   // console.log(barberServices);
 console.log("fethcing services...");
@@ -72,17 +72,22 @@ console.log("fethcing services...");
       button.type = 'button';
       button.id = "removeServiceButton";
       button.style.backgroundColor = "red";
+      td3.style.boxShadow  = "none";
+      td3.style.border = "none";
+      td3.style.width = "1%";
       button.style.width = "20px";
       button.style.height = "20px";
       td1.style.textAlign = "right";
       td1.style.paddingRight = "5px";
       td2.style.textAlign = "center";
+      td2.style.width = "1%";
       button.style.background = "url('assets/img/remove.png') no-repeat";
       td1.innerText =""+existingServiceDescription;
       td2.innerText = ""+existingServicePrice;
       tr.classList.add("serviceTableRow");
       td1.classList.add("serviceCell");
       td2.classList.add("priceCell");
+      tr.style.boxShadow= "none";
 
       td3.appendChild(button);
       tr.appendChild(td1);
@@ -126,6 +131,13 @@ function addNewService()
       button.style.width = "20px";
       button.style.height = "20px";
       button.style.background = "url('assets/img/remove.png') no-repeat";
+      td1.style.textAlign = "right";
+      td1.style.paddingRight = "5px";
+      td2.style.textAlign = "center";
+      td2.style.width = "1%";
+      td3.style.border = "none";
+      td3.style.width = "1%";
+
       td1.innerText =""+getSelectedServicedDecription();
       td2.innerText = ""+getSelectedServicePrice();
       tr.classList.add("serviceTableRow");
