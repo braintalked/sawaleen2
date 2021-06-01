@@ -1,4 +1,6 @@
 //////////////////////// STAET DATA FETCHING ///////////////////////////
+const loader = document.querySelector(".smallLoadingAnimation");
+loader.classList.remove("hidden");
 
 var saloons = db.collection("saloons").doc("Saloon Profiles");
 
@@ -15,7 +17,6 @@ saloons.get().then((doc) => {
        
       }
     updateProfileServices(barberServices);
-      
     } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -47,10 +48,12 @@ function getSelectedServicePrice()
 
 function updateProfileServices(barberServices)
 {
-
+  loader.classList.add("hidden");
+  loader.classList.add("d-none");
+  
   // console.log(barberServices);
   // console.log(barberServices);
-
+console.log("fethcing services...");
   let numberOfexistingServices = Object.keys(barberServices).length;
   let existingServiceDescription= "";
   let existingServicePrice = "";
