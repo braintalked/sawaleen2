@@ -192,6 +192,14 @@ html
     min-height: 50px;
     padding: 10px;
   }
+  .checkboxInput
+  {
+    flex: 1;
+  }
+  .serviceCheckbox
+  {
+    flex: 8;
+  }
   .nameWraper
   {
     /* background-color: green; */
@@ -362,6 +370,16 @@ html
     border-bottom: 0.5px solid grey;
     min-height: 50px;
     padding: 10px;
+  }
+  .checkboxInput
+  {
+    flex: 1;
+    justify-self: flex-end;
+    border: solid 1px black;
+  }
+  .serviceCheckbox
+  {
+    flex: 6;
   }
   .nameWraper
   {
