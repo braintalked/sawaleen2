@@ -137,6 +137,7 @@ function updateProfile()
     div1.className = "d-flex justify-content-end align-items-center col-xs-12 col-sm-12 col-md-12 col-lg-12 ml-auto"
     div2.className = "nameWraper ml-auto col-xs-10 col-sm-10 col-md-10 col-lg-10"
     input1.type = "checkbox"
+    input1.style.minWidth = "13px !important";
     input1.id = "checkbox"+i;
     input1.name = "service"+i;
     label1.className = "serviceCheckbox";
