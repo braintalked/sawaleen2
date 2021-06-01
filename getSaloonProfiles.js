@@ -97,7 +97,7 @@ function  newBarberCard(name,province,city,barberID,services)
     div2.className = "card w-100 mb-2 btn book"
     div2.id = barberID;
     img.className =  "card-img-top"
-    img.src = "../images/barberAvatar.png"
+    img.src = "images/barberAvatar.png"
     img.id = barberID+"image"
     div3.className = "card-body"
     div4.className = "text-center"
