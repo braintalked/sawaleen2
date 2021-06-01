@@ -48,6 +48,9 @@
                      }
                 });
               /////////////////////// Sart Real-time database listener ////////////////////////
+              const loader = document.querySelector(".smallLoadingAnimation");
+              loader.classList.remove("hidden");
+
               db.collection("clients").onSnapshot((snapshot) => {
                   let changes  = snapshot.docChanges();
                   changes.forEach(change => {
@@ -102,7 +105,9 @@
 let i = 1;
 function addNewClient(clientName, clientPhone, clientBookedServices)
 {
- 
+  loader.classList.add("hidden");
+  loader.classList.add("d-none");
+  
   console.log("inside addNewClient Function...");
 
       let tr = document.createElement("tr");
