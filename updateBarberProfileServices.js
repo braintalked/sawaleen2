@@ -117,6 +117,7 @@ function updateProfile()
     servicePriceText = document.createTextNode(" ");
     input1.style.visibility = "hidden";
     div3.style.visibility = "hidden";
+    label1.style.textAlign= "center";
  }
   
 //  <div id="servicesOneRowDescription" class="d-flex justify-content-end align-items-center col-xs-12 col-sm-12 col-md-12 col-lg-12 ml-auto">
