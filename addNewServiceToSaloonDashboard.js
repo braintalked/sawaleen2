@@ -70,10 +70,13 @@ console.log("fethcing services...");
       let button = document.createElement("button");
 
       button.type = 'button';
+      button.border = "none";
       button.id = "removeServiceButton";
       button.style.backgroundColor = "red";
       td3.style.boxShadow  = "none";
-      td3.style.border = "none";
+      td3.style.borderTop = "solid 0.1px black";
+      td3.style.borderRight = "solid 0.1px black";
+      td3.style.borderBottom = "solid 0.1px black";
       td3.style.width = "1%";
       button.style.width = "20px";
       button.style.height = "20px";
@@ -126,6 +129,7 @@ function addNewService()
       let button = document.createElement("button");
 
       button.type = 'button';
+      button.border = "none";
       button.id = "removeServiceButton";
       button.style.backgroundColor = "red";
       button.style.width = "20px";
@@ -135,7 +139,9 @@ function addNewService()
       td1.style.paddingRight = "5px";
       td2.style.textAlign = "center";
       td2.style.width = "1%";
-      td3.style.border = "none";
+      td3.style.borderTop = "solid 0.1px black";
+      td3.style.borderRight = "solid 0.1px black";
+      td3.style.borderBottom = "solid 0.1px black";
       td3.style.width = "1%";
 
       td1.innerText =""+getSelectedServicedDecription();
