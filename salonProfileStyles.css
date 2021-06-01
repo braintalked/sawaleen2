@@ -236,7 +236,7 @@ html
  }
   .startingFrom
   {
-    background-color: red;
+    /* background-color: red; */
     display: block;
     align-self: center;
     font-size: 20px;
@@ -422,7 +422,7 @@ html
  }
   .startingFrom
   {
-    background-color: red;
+    /* background-color: red; */
     display: block;
     align-self: center;
     font-size: 16px;
