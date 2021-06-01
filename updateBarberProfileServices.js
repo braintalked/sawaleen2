@@ -116,7 +116,7 @@ function updateProfile()
     serviceDescriptionText = document.createTextNode("لايوجد خدمات حالياً");
     servicePriceText = document.createTextNode(" ");
     input1.style.visibility = "hidden";
-    div3.style.visibility = "hidden";
+    div3.style.display = "none";
     label1.style.textAlign= "center";
  }
   
