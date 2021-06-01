@@ -51,10 +51,11 @@ function  newBarberCard(name,province,city,barberID,services)
   let div3 = document.createElement("div");
   let div4 = document.createElement("div");
   let h5 = document.createElement("h5");
+  let image = document.createElement("img");
+  let span1 = document.createElement("span");
+  let span2 = document.createElement("span");
   let p1 = document.createElement("p");
-  let p2 = document.createElement("p");
-  let p3 = document.createElement("p");
-  let button = document.createElement("button");
+  // let button = document.createElement("button");
 
   switch (province) {
     case "المنطقة الشرقية":
@@ -92,36 +93,41 @@ function  newBarberCard(name,province,city,barberID,services)
     provinceName = "";
     }
 
-  div1.className = "col-xs-3 col-sm-6 col-md-6 col-lg-3 barber "+provinceName+" "+(city.replace(/\s/g, ''))
-  div2.className = "card w-100 mb-2"
-  img.className =  "card-img-top"
-  img.src = "images/barberAvatar.png"
-  img.id = barberID+"image"
-  div3.className = "card-body"
-  div4.className = "text-center"
-  h5.className = "card-title"
-  h5.style.textAlign = "center"
-  h5.innerText = name
-  h5.id = barberID+"name"
-  p1.className = "text-right "+barberID+"province"
-  p1.innerText = province
-  p2.style.marginBottom = "5px"
-  p2.className = "text-right "+barberID+"city"
-  p2.innerText = city
-  button.classList = "btn btn-lg btn-info pt-1 pb-1 book rounded-pill"
-  button.id =  barberID
-  button.type  =  "button"
-  button.innerText = "حــجــز"
+    div1.className = "col-xs-3 col-sm-6 col-md-6 col-lg-3 barber "+provinceName+" "+(city.replace(/\s/g, ''))
+    div2.className = "card w-100 mb-2 btn book"
+    div2.id = barberID;
+    img.className =  "card-img-top"
+    img.src = "../images/barberAvatar.png"
+    img.id = barberID+"image"
+    div3.className = "card-body"
+    div4.className = "text-center"
+    h5.className = "card-title"
+    h5.style.textAlign = "center"
+    h5.innerText = name
+    h5.id = barberID+"name"
+    image.src = "images/locationIcon-small.png";    
+    span1.className = "text-right "+barberID+"province"
+    span1.style.fontSize = "14px";
+    span2.style.fontSize = "14px";
+    span1.innerText = province+" ، ";
+    span2.style.marginBottom = "5px"
+    span2.className = "text-right "+barberID+"city"
+    span2.innerText = city
+  // button.classList = "btn btn-lg btn-info pt-1 pb-1 rounded-pill"
+  // button.id =  barberID
+  // button.type  =  "button"
+  // button.innerText = "حــجــز"
   // button.onclick = 'barberProfilePage()'
   // p3.innerHTML = "<button id= 'barberID' type='button' onclick= 'barberProfilePage(barberID)' class='btn btn-lg btn-info pt-1 pb-1 search'>حــجــز</button>"
-  p3.appendChild(button)
+  // p3.appendChild(button)
   div1.appendChild(div2)
-  div4.appendChild(p3)
+  div4.appendChild(p1)
   div2.appendChild(img)
   div2.appendChild(div3)
   div3.appendChild(h5)
-  div3.appendChild(p1)
-  div3.appendChild(p2)
+  div3.appendChild(image)
+  div3.appendChild(span1)
+  div3.appendChild(span2)
   div2.appendChild(div4)
   let lengthofDictionary = 0;
   if ( services != null)
