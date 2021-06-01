@@ -129,7 +129,7 @@ html
   }
   #servicesDescriptionsContainer
   {
-    min-height: 200px;
+    min-height: 50px;
   }
 
   #salonImageContainer
@@ -189,7 +189,7 @@ html
     display: flex;
     align-items: center;
     border-bottom: 0.5px solid grey;
-    min-height: 50px;
+    min-height: 70px;
     padding: 10px;
   }
   .checkboxInput
@@ -308,7 +308,7 @@ html
   }
   #servicesDescriptionsContainer
   {
-    min-height: 200px;
+    min-height: 70px;
   }
 
   #salonImageContainer
