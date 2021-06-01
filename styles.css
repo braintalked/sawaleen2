@@ -8,7 +8,8 @@ body
     font-family: 'Montserrat', sans-serif;
 
 }
-/*  Start of Loading Animation */
+
+/*  Start of Colored/Large Loading Animation */
 .loadingAnimation
 {
     width: 100%;
@@ -100,7 +101,8 @@ body
       transform: scale(1);
     }
   }
-/*  End of Loading Animation */
+/*  End of Colored/Large Loading Animation */
+
 #signupHyperlink
 {
   color: #fff;
