@@ -141,7 +141,7 @@ function updateProfile()
     input1.name = "service"+i;
     label1.className = "serviceCheckbox";
     label1.id = "labelcheckbox"+i
-    label1.style.marginRight = "5px";
+    label1.style.marginRight = "10px";
     label1.for = "service"+i;
     label1.style.fontSize = "20px";
     label1.appendChild(serviceDescriptionText);
