@@ -16,96 +16,103 @@
 <html lang="en">
 
 <head>
-           <!-- The core Firebase JS SDK is always required and must be listed first -->
-           <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
-           <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
-           <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
-           <!-- TODO: Add SDKs for Firebase products that you want to use
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
               https://firebase.google.com/docs/web/setup#available-libraries -->
-     
-           <script>
-           // Your web app's Firebase configuration
-           var firebaseConfig = {
-             apiKey: "AIzaSyDjsKQlqNRWOWD6Qw6tklqtP03BtUW_lqw",
-             authDomain: "groceryapp-b381a.firebaseapp.com",
-             databaseURL: "https://groceryapp-b381a.firebaseio.com",
-             projectId: "groceryapp-b381a",
-             storageBucket: "groceryapp-b381a.appspot.com",
-             messagingSenderId: "1092044916930",
-             appId: "1:1092044916930:web:b3493c5ddfdef83633d35b"
-           };
-           // Initialize Firebase
-           firebase.initializeApp(firebaseConfig);
-           var db = firebase.firestore();
-           </script>
-     
-<!-- Bootstrap CDN -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<!-- Bootstrap RTL CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.rtl.min.css" integrity="sha384-jHiSqEim4+W1UCvv8kTcMbtCZlRF8MxbgKdfpvncia8gdN1UImBnhTpKtufREzv7" crossorigin="anonymous">      <!-- Bootstrap css & javascript links -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<!-- Font awesome Icons -->
-<script src="https://kit.fontawesome.com/ab5937a0f1.js" crossorigin="anonymous"></script>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
-<!-- Firebase Storage CDN -->
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
 
-<script>
-// Your web app's Firebase configuration
-var firebaseConfig =
-{
-  apiKey: "AIzaSyDjsKQlqNRWOWD6Qw6tklqtP03BtUW_lqw",
-  authDomain: "groceryapp-b381a.firebaseapp.com",
-  databaseURL: "https://groceryapp-b381a.firebaseio.com",
-  projectId: "groceryapp-b381a",
-  storageBucket: "groceryapp-b381a.appspot.com",
-  messagingSenderId: "1092044916930",
-  appId: "1:1092044916930:web:b3493c5ddfdef83633d35b",
-  storageBucket: 'gs://groceryapp-b381a.appspot.com'
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-var db = firebase.firestore();
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDjsKQlqNRWOWD6Qw6tklqtP03BtUW_lqw",
+      authDomain: "groceryapp-b381a.firebaseapp.com",
+      databaseURL: "https://groceryapp-b381a.firebaseio.com",
+      projectId: "groceryapp-b381a",
+      storageBucket: "groceryapp-b381a.appspot.com",
+      messagingSenderId: "1092044916930",
+      appId: "1:1092044916930:web:b3493c5ddfdef83633d35b"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+  </script>
 
-var photoSource = "";
-function updatePhotoSource()
-{
-  // let file = document.getElementById('#saloonPhoto');
-  // photoSource = file.name;
-  // console.log("new path is: "+photoSource);
-}
+  <!-- Bootstrap CDN -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <!-- Bootstrap RTL CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.rtl.min.css"
+    integrity="sha384-jHiSqEim4+W1UCvv8kTcMbtCZlRF8MxbgKdfpvncia8gdN1UImBnhTpKtufREzv7" crossorigin="anonymous">
+  <!-- Bootstrap css & javascript links -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!-- Small Animation CSS Styles -->
+  <link rel="stylesheet" href="smallAnimationStyles.css">
+  <!-- Font awesome Icons -->
+  <script src="https://kit.fontawesome.com/ab5937a0f1.js" crossorigin="anonymous"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
+  <!-- Firebase Storage CDN -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
 
-  function uploadPhoto()
-  {
-    // // let file = document.getElementById('#saloonPhoto');
-    // console.log("file name is: "+file.name);
-    // // Create a root reference
-    // var storageRef = firebase.storage().ref();
-    // // Create a reference to 'mountains.jpg'
-    // var saloonsRef = storageRef.child(file.name);
-    // // Create a reference to 'images/mountains.jpg'
-    // var saloonsPhotosRef = storageRef.child('images/'+(file.name));
-  }
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig =
+    {
+      apiKey: "AIzaSyDjsKQlqNRWOWD6Qw6tklqtP03BtUW_lqw",
+      authDomain: "groceryapp-b381a.firebaseapp.com",
+      databaseURL: "https://groceryapp-b381a.firebaseio.com",
+      projectId: "groceryapp-b381a",
+      storageBucket: "groceryapp-b381a.appspot.com",
+      messagingSenderId: "1092044916930",
+      appId: "1:1092044916930:web:b3493c5ddfdef83633d35b",
+      storageBucket: 'gs://groceryapp-b381a.appspot.com'
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
 
-</script>
+    var photoSource = "";
+    function updatePhotoSource() {
+      // let file = document.getElementById('#saloonPhoto');
+      // photoSource = file.name;
+      // console.log("new path is: "+photoSource);
+    }
 
-<meta charset="utf-8" />
-<link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-<link rel="icon" type="image/png" href="./assets/img/favicon.png">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>
-</title>
-<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-<!--     Fonts and icons     -->
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-<!-- CSS Files -->
-<link href="./assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="./assets/demo/demo.css" rel="stylesheet" />
+    function uploadPhoto() {
+      // // let file = document.getElementById('#saloonPhoto');
+      // console.log("file name is: "+file.name);
+      // // Create a root reference
+      // var storageRef = firebase.storage().ref();
+      // // Create a reference to 'mountains.jpg'
+      // var saloonsRef = storageRef.child(file.name);
+      // // Create a reference to 'images/mountains.jpg'
+      // var saloonsPhotosRef = storageRef.child('images/'+(file.name));
+    }
+
+  </script>
+
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+    name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="./assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="./assets/demo/demo.css" rel="stylesheet" />
 
 </head>
 
@@ -147,7 +154,8 @@ function updatePhotoSource()
           <div class="navbar-wrapper">
             <a class="navbar-brand" href="javascript:void(0)">Clients</a>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+            aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>
             <span class="navbar-toggler-icon icon-bar"></span>
@@ -217,23 +225,34 @@ function updatePhotoSource()
                         <tr id="startAppendingClientsFromHere"></tr>
                         <tr>
                           <td>
-                            
+
                           </td>
                           <td>
-                            
+
                           </td>
                           <td>
-                            
+
                           </td>
                           <td>
-                            
+
                           </td>
                           <td class="text-primary">
-                            
+
                           </td>
                         </tr>
                       </tbody>
                     </table>
+                    <div>
+                      <!-- Start loading animation -->
+                      <div class="smallLoadingAnimation">
+                        <div class="dotsSmall one">
+                          <div class="dotSmall"></div>
+                          <div class="dotSmall"></div>
+                          <div class="dotSmall"></div>
+                        </div>
+                      </div>
+                      <!-- End loading  animation  -->
+                    </div>
                   </div>
                 </div>
               </div>
@@ -282,20 +301,20 @@ function updatePhotoSource()
 <script src="./assets/demo/demo.js"></script>
 
 <script>
-    firebase.auth().onAuthStateChanged((user) => {
-    if (user){ 
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
 
-        } else {
-          // User is signed out
-          window.location.replace("index.html");
-        }
-    });
+    } else {
+      // User is signed out
+      window.location.replace("index.html");
+    }
+  });
 
 
 </script>
 <script>
-  $(document).ready(function() {
-    $().ready(function() {
+  $(document).ready(function () {
+    $().ready(function () {
       $sidebar = $('.sidebar');
 
       $sidebar_img_container = $sidebar.find('.sidebar-background');
@@ -306,7 +325,7 @@ function updatePhotoSource()
 
       window_width = $(window).width();
 
-      $('.fixed-plugin a').click(function(event) {
+      $('.fixed-plugin a').click(function (event) {
         if ($(this).hasClass('switch-trigger')) {
           if (event.stopPropagation) {
             event.stopPropagation();
@@ -316,7 +335,7 @@ function updatePhotoSource()
         }
       });
 
-      $('.fixed-plugin .active-color span').click(function() {
+      $('.fixed-plugin .active-color span').click(function () {
         $full_page_background = $('.full-page-background');
 
         $(this).siblings().removeClass('active');
@@ -337,7 +356,7 @@ function updatePhotoSource()
         }
       });
 
-      $('.fixed-plugin .background-color .badge').click(function() {
+      $('.fixed-plugin .background-color .badge').click(function () {
         $(this).siblings().removeClass('active');
         $(this).addClass('active');
 
@@ -348,7 +367,7 @@ function updatePhotoSource()
         }
       });
 
-      $('.fixed-plugin .img-holder').click(function() {
+      $('.fixed-plugin .img-holder').click(function () {
         $full_page_background = $('.full-page-background');
 
         $(this).parent('li').siblings().removeClass('active');
@@ -358,7 +377,7 @@ function updatePhotoSource()
         var new_image = $(this).find("img").attr('src');
 
         if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-          $sidebar_img_container.fadeOut('fast', function() {
+          $sidebar_img_container.fadeOut('fast', function () {
             $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
             $sidebar_img_container.fadeIn('fast');
           });
@@ -367,7 +386,7 @@ function updatePhotoSource()
         if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
           var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
 
-          $full_page_background.fadeOut('fast', function() {
+          $full_page_background.fadeOut('fast', function () {
             $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
             $full_page_background.fadeIn('fast');
           });
@@ -386,7 +405,7 @@ function updatePhotoSource()
         }
       });
 
-      $('.switch-sidebar-image input').change(function() {
+      $('.switch-sidebar-image input').change(function () {
         $full_page_background = $('.full-page-background');
 
         $input = $(this);
@@ -418,7 +437,7 @@ function updatePhotoSource()
         }
       });
 
-      $('.switch-sidebar-mini input').change(function() {
+      $('.switch-sidebar-mini input').change(function () {
         $body = $('body');
 
         $input = $(this);
@@ -433,7 +452,7 @@ function updatePhotoSource()
 
           $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
 
-          setTimeout(function() {
+          setTimeout(function () {
             $('body').addClass('sidebar-mini');
 
             md.misc.sidebar_mini_active = true;
@@ -441,12 +460,12 @@ function updatePhotoSource()
         }
 
         // we simulate the window Resize so the charts will get updated in realtime.
-        var simulateWindowResize = setInterval(function() {
+        var simulateWindowResize = setInterval(function () {
           window.dispatchEvent(new Event('resize'));
         }, 180);
 
         // we stop the simulation of Window Resize after the animations are completed
-        setTimeout(function() {
+        setTimeout(function () {
           clearInterval(simulateWindowResize);
         }, 1000);
 
@@ -454,4 +473,5 @@ function updatePhotoSource()
     });
   });
 </script>
+
 </html>
