@@ -8,7 +8,7 @@ saloons.get().then((doc) => {
       var data = doc.data()
       for (var key in data)
       {
-        if([key] == localStorage.getItem("barberID"))
+        if([key] == firebase.auth().currentUser.uid)
         {
           barberServices = data[key]["services"];
         }
