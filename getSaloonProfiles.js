@@ -108,7 +108,7 @@ function  newBarberCard(name,province,city,barberID,services)
   p2.style.marginBottom = "5px"
   p2.className = "text-right "+barberID+"city"
   p2.innerText = city
-  button.classList = "btn btn-lg btn-info pt-1 pb-1 book"
+  button.classList = "btn btn-lg btn-info pt-1 pb-1 book rounded-pill"
   button.id =  barberID
   button.type  =  "button"
   button.innerText = "حــجــز"
