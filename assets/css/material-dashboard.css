@@ -30,6 +30,7 @@ html {
   -ms-text-size-adjust: 100%;
   -ms-overflow-style: scrollbar;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background-color: white;
 }
 
 @-ms-viewport {
@@ -13541,7 +13542,7 @@ label {
 
 .is-focused .bmd-label-floating,
 .is-filled .bmd-label-floating {
-  top: -1rem;
+  top: -2rem;
   left: 0;
   font-size: 0.6875rem;
 }
@@ -13630,7 +13631,9 @@ select.form-control {
 }
 
 .form-group .bmd-label-static {
-  top: -10px;
+  top: -25px;
+  margin-top: 10px;
+  color: black !important;
 }
 
 textarea {
@@ -15430,7 +15433,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .sidebar[data-color="purple"] li.active>a {
-  background-color: #9c27b0;
+  background-color: #5a0269;
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
 }
 
@@ -15726,7 +15729,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .fixed-plugin .badge-purple {
-  background-color: #9368E9;
+  background-color: #95909e;
 }
 
 .fixed-plugin .badge-white {
@@ -16753,7 +16756,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .table>tfoot>tr>td {
   padding: 12px 8px;
   vertical-align: middle;
-  border-color: #ddd;
+  /* border-color: #ddd; */
 }
 
 .table thead tr th {
@@ -20411,7 +20414,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .dark-edition .sidebar[data-color="purple"] li.active>a {
-  background: linear-gradient(60deg, #7b1fa2, #913f9e);
+  background: #0b579e;
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
 }
 
@@ -20445,7 +20448,7 @@ Copyright (c) 2015 Daniel Eden
 
 .dark-edition .sidebar .sidebar-background:after,
 .dark-edition .sidebar {
-  background: #1f283e;
+  background: #097a9c; /* SIDEBAR BACKGROUND COLOR */
   opacity: .94;
 }
 
