@@ -42,18 +42,23 @@
       <!-- Font Awesome fpr Quantity Buttons-->
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
       <!-- Google Fonts / Arabic -->
-      <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa&display=swap" rel="stylesheet">      <!-- JQuery -->
       <!-- JQuery -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <!-- FIREBASE -->
-
+      <style>
+        .form-input>input{
+          color: black !important;
+        }
+        </style>
 
   </head>
+
 <body>
     <!-- ////////////////////////////////////// START NAVIGATION BAR ////////////////////////////////////////// -->
-            <nav class="navbar navbar-expand-lg navbar-light fixed-top border border-dark" style="padding: 5px; background-color: #fff;">
-              <a class="navbar-brand artEffect" href="index.html" style="color: #4aa96c; font-weight: bold; font-size: 2rem; margin-left: 20px; font-family: 'Lalezar', cursive;">صوالين</a>
+            <nav dir="rtl" class="navbar navbar-expand-lg navbar-light fixed-top border border-dark" style="padding: 5px; background-color: #fff;">
+              <a id="logoFont" class="navbar-brand" href="index.html" style="color: rgb(255, 92, 57); font-weight: bold; font-size: 2rem; margin-left: 35px;">صوالين</a>
                 <div class="checkoutMobile myCart mr-5">
                   <a href="boughtMaterials.html">
                     <!-- <div class="checkoutBadge">0</div> -->
@@ -71,7 +76,7 @@
                         <button id="signIn" class="btn btn-primary mt-4 signup">Sign in</button>
                         <!-- <div class="text-center mt-3"> <span>Or continue with these social profile</span> </div>
                         <div class="d-flex justify-content-center mt-4"> <span class="social"><i class="fa fa-google"></i></span> <span class="social"><i class="fa fa-facebook"></i></span> <span class="social"><i class="fa fa-twitter"></i></span> <span class="social"><i class="fa fa-linkedin"></i></span> </div> -->
-                        <div class="text-center mt-4"> <span>Not registered?</span> <a href="signup.html" class="text-decoration-none">Create Account</a> </div>
+                        <div style="text-align: center; " class="mt-4"> <span style="color: black">Not registered?</span> <a href="signup.html" class="text-decoration-none">Create Account</a> </div>
                     </div>
                 </div>
             </div>
