@@ -42,18 +42,30 @@
       <!-- Font Awesome fpr Quantity Buttons-->
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
       <!-- Google Fonts / Arabic -->
-      <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa&display=swap" rel="stylesheet">      <!-- JQuery -->
       <!-- JQuery -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <!-- FIREBASE -->
+<style>
+.form-control, .form-select
+{
+  color: black !important; 
+}
 
+select{
+  color: black !important;
+}
+.form-input>input{
+  color: black !important;
+}
+</style>
   </head>
 <body>
     <!-- ////////////////////////////////////// START NAVIGATION BAR ////////////////////////////////////////// -->
-          <nav class="navbar navbar-expand-lg navbar-light fixed-top border border-dark" style="padding: 5px; background-color: #fff;">
-            <a class="navbar-brand artEffect" href="index.html" style="color: #4aa96c; font-weight: bold; font-size: 2rem; margin-left: 20px; font-family: 'Lalezar', cursive;">صوالين</a>                <div class="checkoutMobile myCart mr-5">
-              <a href="boughtMaterials.html">
+          <nav dir="rtl" class="navbar navbar-expand-lg navbar-light fixed-top border border-dark" style="padding: 5px; background-color: #fff;">
+            <a id="logoFont" class="navbar-brand" href="index.html" style="color: rgb(255, 92, 57); font-weight: bold; font-size: 2rem; margin-left: 35px;">صوالين</a>
+            <a href="boughtMaterials.html">
                 <!-- <div class="checkoutBadge">0</div> -->
                 <!-- <i class="fas fa-2x fa-shopping-cart shopping-cart-icon"></i> -->
               </a>
@@ -77,7 +89,7 @@
                         <i id="required44" class="fas fa-check-circle d-none"></i>
                         <div class="">
                          
-                          <select style="background-color: grey" class="form-select form-select-province mb-3" aria-label=".form-select-lg example">
+                          <select class="form-select form-select-province mb-3" aria-label=".form-select-lg example">
                             <option selected>المنطقة (Province)</option>
                             <option value="1">الرياض (Riyadh)</option>
                             <option value="2">مكة المكرمة (Makkah)</option>
@@ -97,7 +109,7 @@
                            <span id="required5" style="font-size: 12px;">*Required</span>
                            <i id="required55" class="fas fa-check-circle d-none"></i>
                            
-                           <select style="background-color: grey" class="form-select form-select-city form-select-city" id="easternCities" aria-label=".form-select-city example" disabled>
+                           <select  class="form-select form-select-city form-select-city" id="easternCities" aria-label=".form-select-city example" disabled>
                             <option selected>المدينة / الحي (City)</option>
                             <option value="1">الظهران</option>
                             <option value="2">الخبر</option>
@@ -110,7 +122,7 @@
                             <option value="9">النعيرية</option>
                            </select>
                            
-                           <select style="background-color: grey" class="form-select form-select-city form-select-city d-none" id="haelCities" aria-label=".form-select-city example">
+                           <select  class="form-select form-select-city form-select-city d-none" id="haelCities" aria-label=".form-select-city example">
                              <option selected>المدينة / الحي (City)</option>
                              <option value="1">مدينة  حائل</option>
                              <option value="2">بقعاء</option>
@@ -126,18 +138,18 @@
                              <option value="5">جبة</option>
                            </select>
 
-                           <select style="background-color: grey" class="form-select form-select-city form-select-city d-none" id="makkahCities" aria-label=".form-select-city example">
+                           <select  class="form-select form-select-city form-select-city d-none" id="makkahCities" aria-label=".form-select-city example">
                              <option selected>المدينة / الحي (City)</option>
                              <option value="1">مكة المكرمة</option>
                              <option value="2">جدة</option>
-                             <option value="3">الظائف</option>
+                             <option value="3">الطائف</option>
                              <option value="4">القنفذة</option>
                              <option value="5">رابغ</option>
                              <option value="6">الليث</option>
                              <option value="7">خليص</option>
                            </select>
 
-                           <select style="background-color: grey" class="form-select form-select-city form-select-city d-none" id="aseerCities" aria-label=".form-select-city example">
+                           <select  class="form-select form-select-city form-select-city d-none" id="aseerCities" aria-label=".form-select-city example">
                              <option selected>المدينة / الحي (City)</option>
                              <option value="1">أبها</option>
                              <option value="2">خميس مشيط</option>
@@ -147,7 +159,7 @@
                              <option value="6">رجال ألمع</option>
                            </select>
 
-                           <select style="background-color: grey" class="form-select form-select-city form-select-city d-none" id="riyadhCities" aria-label=".form-select-city example">
+                           <select  class="form-select form-select-city form-select-city d-none" id="riyadhCities" aria-label=".form-select-city example">
                              <option selected>المدينة / الحي (City)</option>
                              <option value="1">شمال الرياض</option>
                              <option value="2">شرق الرياض</option>
@@ -156,7 +168,7 @@
                              <option value="5">وسط الرياض</option>
                            </select>
 
-                           <select style="background-color: grey" class="form-select form-select-city form-select-city d-none" id="madinahCities" aria-label=".form-select-city example">
+                           <select  class="form-select form-select-city form-select-city d-none" id="madinahCities" aria-label=".form-select-city example">
                             <option selected>المدينة / الحي (City)</option>
                             <option value="1">المدينة المنورة</option>
                             <option value="2">الحناكية</option>
@@ -165,7 +177,7 @@
                             <option value="5">ينبع الصناعية</option>
                           </select>
                          
-                          <select style="background-color: grey" class="form-select form-select-city form-select-city d-none" id="qassimCities" aria-label=".form-select-city example">
+                          <select  class="form-select form-select-city form-select-city d-none" id="qassimCities" aria-label=".form-select-city example">
                             <option selected>المدينة / الحي (City)</option>
                             <option value="1">بريدة</option>
                             <option value="2">عنيزة</option>
@@ -182,7 +194,7 @@
                             <option value="13">ضرية</option>
                           </select>
 
-                          <select style="background-color: grey" class="form-select form-select-city form-select-city d-none" id="taboukCities" aria-label=".form-select-city example">
+                          <select  class="form-select form-select-city form-select-city d-none" id="taboukCities" aria-label=".form-select-city example">
                             <option selected>المدينة / الحي (City)</option>
                             <option value="1">تيماء</option>
                             <option value="2">أملج</option>
@@ -192,7 +204,7 @@
                             <option value="6">البدع</option>
                           </select>
 
-                          <select style="background-color: grey" class="form-select form-select-city d-none" id="najranCities" aria-label=".form-select-city example">
+                          <select  style="color: black" class="form-select form-select-city d-none" id="najranCities" aria-label=".form-select-city example">
                             <option selected>المدينة / الحي (City)</option>
                             <option value="1">حي الفيصلية</option>
                             <option value="2">حي الفهد</option>
@@ -212,7 +224,7 @@
                             <option value="16">نجران البلد</option>
                           </select>
 
-                          <select style="background-color: grey" class="form-select form-select-city d-none" id="jazanCities" aria-label=".form-select-city example">
+                          <select  class="form-select form-select-city d-none" id="jazanCities" aria-label=".form-select-city example">
                             <option selected>المدينة / الحي (City)</option>
                             <option value="1">صبيا</option>
                             <option value="2">صامطة</option>
@@ -234,10 +246,10 @@
                            </select>
 
                         </div>
-                        <div class="form-check"> <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked> <label class="form-check-label" for="flexCheckChecked"> I agree to  all the terms and conditions</label> </div> <button id="createAccount" class="btn btn-primary mt-4 signup">Create Account</button>
+                        <div class="form-check"> <input style = "color:black" class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked> <label style = "color:black" class="form-check-label" for="flexCheckChecked"> I agree to  all the terms and conditions</label> </div> <button id="createAccount" class="btn btn-primary mt-4 signup">Create Account</button>
                         <!-- <div class="text-center mt-3"> <span>Or continue with these social profile</span> </div>
                         <div class="d-flex justify-content-center mt-4"> <span class="social"><i class="fa fa-google"></i></span> <span class="social"><i class="fa fa-facebook"></i></span> <span class="social"><i class="fa fa-twitter"></i></span> <span class="social"><i class="fa fa-linkedin"></i></span> </div> -->
-                        <div class="text-center mt-4"> <span>Already a member?</span> <a href="signin.html" class="text-decoration-none">Login</a> </div>
+                        <div style="text-align: center;" class="mt-4"> <span style="color: black;">Already a member?</span> <a href="signin.html" class="text-decoration-none">Login</a> </div>
                     </div>
                 </div>
             </div>
