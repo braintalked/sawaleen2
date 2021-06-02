@@ -92,11 +92,55 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="./assets/demo/demo.css" rel="stylesheet" />
 
+  <style>
+    body{
+      background-color: white !important;
+      color: black !important;
+    }
+    a{
+      color: black !important;
+    }
+    i{
+      color: black !important;
+    }
+    .card{
+      background-color: #deeeea !important;
+    }
+    .card-header{
+      background: linear-gradient(60deg, #097a9c, #39a9cb) !important;
+    }
+    .btn{
+      background-color: #0b579e!important;
+      color: white !important;
+    }
+    table{
+      border: none !important;
+    }
+    tbody{
+      border: blank !important;
+      color: black !important;
+    }
+    th{
+      border: solid 1px black !important;
+    }
+    td{
+      border: solid 1px black !important;
+    }
+    .nav-item>.nav-link>p{
+      /* background-color: white !important; */
+      color: white !important;
+    }
+    #saloonPhoto{
+      color: black !important;
+    }
+
+  </style>
+
 </head>
 
 <body class="dark-edition">
   <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-background-color="black" data-image="./assets/img/sidebar-1.jpg">
+    <div class="sidebar" data-color="purple" data-background-color="grey" data-image="./assets/img/sidebar-1.jpg">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -210,7 +254,7 @@
                     </div>
                     <div class="row">
                       <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                        <select id="serviceDescription" style="background-color: grey"
+                        <select id="serviceDescription" style=""
                           class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                           <option selected>ٍService</option>
                           <option value="1"> قصشعر وعناية كاملةبالشعر من تغسيل وتنشيف و صيغ و كل مايحتاجه شعرك من عناية
@@ -220,7 +264,7 @@
                         </select>
                       </div>
                       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <select id="servicePrice" style="background-color: grey" class="form-select form-select-lg mb-3"
+                        <select id="servicePrice" style="" class="form-select form-select-lg mb-3"
                           aria-label=".form-select-lg example">
                           <option selected>ٍPrice</option>
                           <option value="1">٥ ريال</option>
@@ -234,11 +278,13 @@
                     </div>
                     <div class="row">
                       <div class="col-md-12">
-                        <table style="width:100%; border-style: solid; border-width: 1px; border-color: white;">
+                        <table style="width:100%;">
                           <tr id="appendServicesAfterThisRow">
 
                             <th style="text-align: center; font-size: 14px;">Service</th>
                             <th style="text-align: center; font-size: 14px;">Price</th>
+                            <!-- <th><button style="min-width: 1%; background-color: rgb(236, 79, 79) !important;"></button> -->
+                            </th>
                           </tr>
 
                         </table>
@@ -283,7 +329,7 @@
                   <!-- start of saloon image upload html code -->
                   <div class="">
                     <input type="file" onchange="updatePhotoSource()" id="saloonPhoto" name="avatar"
-                      accept="image/png, image/jpeg" style="color: white; background-color: grey;">
+                      accept="image/png, image/jpeg" style="color: white;">
                   </div>
                   <button type="button" onclick="uploadPhoto()" class="btn btn-primary">Upload Photo</button>
                   <!-- end of saloon image upload html code -->
@@ -291,11 +337,11 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="">Saloon Name</label>
-                        <input type="text" class="form-control">
+                        <input id="salonName" style="color: black; border: solid 1px black; margin-top: 15px" type="text" class="form-control">
                       </div>
                     </div>
                     <div class="col-md-12">
-                      <select style="background-color: grey" class="form-select form-select-province mb-3"
+                      <select style="" class="form-select form-select-province mb-3"
                         aria-label=".form-select-lg example">
                         <option selected>ٍProvince</option>
                         <option value="1">الشرقية(Eastern)</option>
@@ -304,7 +350,7 @@
                         <option value="4">الجنوبية(Southern)</option>
                         <option value="5">الوسطى(Middle)</option>
                       </select>
-                      <select style="background-color: grey" class="form-select form-select-sm form-select-city"
+                      <select style="" class="form-select form-select-sm form-select-city"
                         id="easternCities" aria-label=".form-select-sm example" disabled>
                         <option selected>المدينة / الحي</option>
                         <option value="1">الظهران</option>
@@ -315,7 +361,7 @@
                         <option value="6">الأحساء</option>
                         <option value="7">حفرالباطن</option>
                       </select>
-                      <select style="background-color: grey" class="form-select form-select-sm form-select-city d-none"
+                      <select style="background-color: white" class="form-select form-select-sm form-select-city d-none"
                         id="northernCities" aria-label=".form-select-sm example">
                         <option selected>المدينة / الحي</option>
                         <option value="1">حائل</option>
@@ -324,7 +370,7 @@
                         <option value="4">الحدود الشمالية</option>
                         <option value="5">عرعر</option>
                       </select>
-                      <select style="background-color: grey" class="form-select form-select-sm form-select-city d-none"
+                      <select style="background-color: white" class="form-select form-select-sm form-select-city d-none"
                         id="westernCities" aria-label=".form-select-sm example">
                         <option selected>المدينة / الحي</option>
                         <option value="1">جدة</option>
@@ -332,7 +378,7 @@
                         <option value="3">المدينة المنورة</option>
                         <option value="5">الظائف</option>
                       </select>
-                      <select style="background-color: grey" class="form-select form-select-sm form-select-city d-none"
+                      <select style="background-color: white" class="form-select form-select-sm form-select-city d-none"
                         id="southernCities" aria-label=".form-select-sm example">
                         <option selected>المدينة / الحي</option>
                         <option value="1">نجران</option>
@@ -343,7 +389,7 @@
                         <option value="6">ظهران الجنوب</option>
                         <option value="6">الباحة</option>
                       </select>
-                      <select style="background-color: grey" class="form-select form-select-sm form-select-city d-none"
+                      <select style="background-color: white" class="form-select form-select-sm form-select-city d-none"
                         id="middleCities" aria-label=".form-select-sm example">
                         <option selected>المدينة / الحي</option>
                         <option value="1">القصيم</option>
@@ -440,7 +486,7 @@
           console.log(newSaloonCity + " is your city");
 
           // Add a new user/saloon to database
-          newSaloonProfile = { saloonID: newSaloonID, saloonName: newSaloonName, saloonEmail: newSaloonEmail, saloonProvince: newSaloonProvince, saloonCity: newSaloonCity, services: {}, clients: { "saloonID": newSaloonID } };
+          newSaloonProfile = { saloonID: newSaloonID, saloonName: newSaloonName, saloonEmail: newSaloonEmail, saloonProvince: newSaloonProvince, saloonCity: newSaloonCity, clients: { "saloonID": newSaloonID } };
           newSaloon[key] = newSaloonProfile;
           db.collection('saloons').doc('Saloon Profiles').set(newSaloon, { merge: true }).then(() => {
             console.log("Saloon added to database successfully written!");
