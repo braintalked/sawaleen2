@@ -107,7 +107,7 @@ function addNewClient(clientName, clientPhone, clientBookedServices)
 {
   loader.classList.add("hidden");
   loader.classList.add("d-none");
-  
+
   console.log("inside addNewClient Function...");
 
       let tr = document.createElement("tr");
