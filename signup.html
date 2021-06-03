@@ -35,8 +35,6 @@
       <!-- Bootstrap RTL CSS -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.rtl.min.css" integrity="sha384-jHiSqEim4+W1UCvv8kTcMbtCZlRF8MxbgKdfpvncia8gdN1UImBnhTpKtufREzv7" crossorigin="anonymous">      <!-- Bootstrap css & javascript links -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-      <!-- Signup CSS Style File -->
-      <link rel="stylesheet" href="signupstyles.css">
       <!-- Font Awesome for All Icons other than the quantity buttons-->
       <script src="https://kit.fontawesome.com/ab5937a0f1.js" crossorigin="anonymous"></script>
       <!-- Font Awesome fpr Quantity Buttons-->
@@ -46,7 +44,8 @@
       <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa&display=swap" rel="stylesheet">      <!-- JQuery -->
       <!-- JQuery -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <!-- FIREBASE -->
+      <!-- Signup CSS Style File -->
+      <link rel="stylesheet" href="signupstyles.css">      
 <style>
 .form-control, .form-select
 {
@@ -56,7 +55,12 @@
 select{
   color: black !important;
 }
-.form-input>input{
+.form-input>input[type=text]{
+  color: black !important;
+}
+.form-input>input[type=email]{
+  color: black !important;
+}.form-input>input[type=password]{
   color: black !important;
 }
 </style>
@@ -77,16 +81,16 @@ select{
                 <div class="col-md-6">
                     <div class="card px-5 py-5" style="margin-top: 50px;">
                       <span id="required1" class="" style="font-size: 12px;">*Required</span>
-                      <i id="required11" class="fas fa-check-circle d-none"></i>
+                      <i id="required11" style="color: black" class="fas fa-check-circle d-none"></i>
                       <div class="form-input"> <i class="fa fa-user"></i> <input id="newSaloonName" type="text" class="form-control" placeholder="Saloon name"> </div>
                         <span id="required2" style="font-size: 12px;">*Required</span>
-                        <i id="required22" class="fas fa-check-circle d-none"></i>
-                        <div class="form-input" style="text-align: left"> <i class="fa fa-envelope"></i> <input type="email" id="email" type="text" class="form-control" placeholder="Email address"> </div>
+                        <i id="required22" style="color: black" class="fas fa-check-circle d-none"></i>
+                        <div class="form-input" style="text-align: left"> <i class="fa fa-envelope"></i> <input type="email" id="email" class="form-control" placeholder="Email address"> </div>
                         <span id="required3" style="font-size: 12px;">*Required <i>(minimum of six characters)</i></span>
-                        <i id="required33" class="fas fa-check-circle d-none"></i>
-                        <div class="form-input"> <i class="fa fa-lock"></i> <input type="password" id="password" type="text" class="form-control" placeholder="password"> </div>
+                        <i id="required33" style="color: black" class="fas fa-check-circle d-none"></i>
+                        <div class="form-input"> <i class="fa fa-lock"></i> <input type="password" id="password" class="form-control" placeholder="password"> </div>
                         <span id="required4" style="font-size: 12px;">*Required</span>
-                        <i id="required44" class="fas fa-check-circle d-none"></i>
+                        <i id="required44" style="color: black" class="fas fa-check-circle d-none"></i>
                         <div class="">
                          
                           <select class="form-select form-select-province mb-3" aria-label=".form-select-lg example">
@@ -99,17 +103,14 @@ select{
                             <option value="6">عسير (Aseer)</option>
                             <option value="7">تبوك (Tabouk)</option>
                             <option value="8">حائل (Hael)</option>
-                            <option value="9">الحدود الشمالية (Northern Borders Province)</option>
-                            <option value="10">جازان (Jazan)</option>
-                            <option value="11">نجران (Najran)</option>
-                            <option value="12">الباحة (Al-Baha)</option>
-                            <option value="13">الجوف (Al-Jouf)</option>
+                            <option value="9">جازان (Jazan)</option>
+                            <option value="10">نجران (Najran)</option>
                            </select>
 
                            <span id="required5" style="font-size: 12px;">*Required</span>
-                           <i id="required55" class="fas fa-check-circle d-none"></i>
+                           <i id="required55" style="color: black" class="fas fa-check-circle d-none"></i>
                            
-                           <select  class="form-select form-select-city form-select-city" id="easternCities" aria-label=".form-select-city example" disabled>
+                           <select  class="form-select form-select-city" id="easternCities" aria-label=".form-select-city example" disabled>
                             <option selected>المدينة / الحي (City)</option>
                             <option value="1">الظهران</option>
                             <option value="2">الخبر</option>
@@ -122,7 +123,7 @@ select{
                             <option value="9">النعيرية</option>
                            </select>
                            
-                           <select  class="form-select form-select-city form-select-city d-none" id="haelCities" aria-label=".form-select-city example">
+                           <select  class="form-select form-select-city d-none" id="haelCities" aria-label=".form-select-city example">
                              <option selected>المدينة / الحي (City)</option>
                              <option value="1">مدينة  حائل</option>
                              <option value="2">بقعاء</option>
@@ -149,7 +150,7 @@ select{
                              <option value="7">خليص</option>
                            </select>
 
-                           <select  class="form-select form-select-city form-select-city d-none" id="aseerCities" aria-label=".form-select-city example">
+                           <select  class="form-select form-select-city d-none" id="aseerCities" aria-label=".form-select-city example">
                              <option selected>المدينة / الحي (City)</option>
                              <option value="1">أبها</option>
                              <option value="2">خميس مشيط</option>
@@ -159,7 +160,7 @@ select{
                              <option value="6">رجال ألمع</option>
                            </select>
 
-                           <select  class="form-select form-select-city form-select-city d-none" id="riyadhCities" aria-label=".form-select-city example">
+                           <select  class="form-select form-select-city d-none" id="riyadhCities" aria-label=".form-select-city example">
                              <option selected>المدينة / الحي (City)</option>
                              <option value="1">شمال الرياض</option>
                              <option value="2">شرق الرياض</option>
@@ -168,7 +169,7 @@ select{
                              <option value="5">وسط الرياض</option>
                            </select>
 
-                           <select  class="form-select form-select-city form-select-city d-none" id="madinahCities" aria-label=".form-select-city example">
+                           <select  class="form-select form-select-city d-none" id="madinahCities" aria-label=".form-select-city example">
                             <option selected>المدينة / الحي (City)</option>
                             <option value="1">المدينة المنورة</option>
                             <option value="2">الحناكية</option>
@@ -177,7 +178,7 @@ select{
                             <option value="5">ينبع الصناعية</option>
                           </select>
                          
-                          <select  class="form-select form-select-city form-select-city d-none" id="qassimCities" aria-label=".form-select-city example">
+                          <select  class="form-select form-select-city d-none" id="qassimCities" aria-label=".form-select-city example">
                             <option selected>المدينة / الحي (City)</option>
                             <option value="1">بريدة</option>
                             <option value="2">عنيزة</option>
