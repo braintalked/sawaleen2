@@ -29,7 +29,16 @@ barbers.get().then((doc) => {
           barberID2 = data[key]["saloonID"];
           barberProvince = data[key]["saloonProvince"];
           barberCity = data[key]["saloonCity"];
-          barberServices = data[key]["services"];
+
+          //new account with no services added...
+          if(data[key]["services"] != null)
+          {
+            barberServices = data[key]["services"];
+          }
+          else
+          {
+            barberServices = {};
+          }
           if(Object.keys(barberServices).length > 0)
           {
             for (i=1; i<=Object.keys(barberServices).length; i++)
