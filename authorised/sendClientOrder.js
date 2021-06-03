@@ -112,15 +112,17 @@ document.querySelector("#bookingButton").addEventListener("click", function()
           
     if (nameIsValid && phoneIsValid)
     {
+      let clientID = uuidv4();
+
       console.log("name and phone are valid...");
       clientName = document.querySelector("#nameInput").value;
       console.log("name: "+clientName);
       clientPhone = document.querySelector("#phoneInput").value;
       console.log("phone: "+clientPhone);
-      clientOrder ={saloonID:barberID, clientName:clientName, clientPhone:clientPhone, clientRequestedServices:clientRequestedServices};
+      clientOrder ={clientID:clientID, saloonID:barberID, clientName:clientName, clientPhone:clientPhone, clientRequestedServices:clientRequestedServices};
       console.log(clientOrder);
 
-      let clientID = uuidv4();
+      
       let barberProfile = {};
 
       let key = clientID;
