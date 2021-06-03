@@ -162,7 +162,7 @@ function provinceFilter()
       var selectedCity = document.getElementById("haelCities");
       selectedCityText = selectedCity.options[selectedCity.selectedIndex].text;
       localStorage.setItem("newSaloonCity", selectedCityText);
-      console.log(selectedCityText)
+      console.log(selectedCityText);
       });
     console.log(selectedProvinceText)
   }
@@ -221,7 +221,7 @@ function provinceFilter()
         var selectedCity = document.getElementById("makkahCities");
         selectedCityText = selectedCity.options[selectedCity.selectedIndex].text;
         localStorage.setItem("newSaloonCity", selectedCityText);
-        console.log(selectedCityText)
+        console.log(selectedCityText);
       });
     console.log(selectedProvinceText)
   }
@@ -280,7 +280,7 @@ function provinceFilter()
         var selectedCity = document.getElementById("aseerCities");
         selectedCityText = selectedCity.options[selectedCity.selectedIndex].text;
         localStorage.setItem("newSaloonCity", selectedCityText);
-        console.log(selectedCityText)
+        console.log(selectedCityText);
       });
       console.log(selectedProvinceText)
   }
@@ -339,12 +339,13 @@ function provinceFilter()
         var selectedCity = document.getElementById("riyadhCities");
         selectedCityText = selectedCity.options[selectedCity.selectedIndex].text;
         localStorage.setItem("newSaloonCity", selectedCityText);
-        console.log(selectedCityText)
+        console.log(selectedCityText);
       });
       console.log(selectedProvinceText)
   }
   else if(selectedProvinceText == "المدينة المنورة (Al-Madinah)")
   {
+    console.log("Madinah selected");
     document.getElementById("easternCities").selectedIndex = 0;
     document.getElementById("makkahCities").selectedIndex = 0;
     document.getElementById("aseerCities").selectedIndex = 0;
@@ -362,7 +363,7 @@ function provinceFilter()
     document.getElementById("riyadhCities").classList.add("d-none")
     document.getElementById("haelCities").classList.add("d-none")
     document.getElementById("qassimCities").classList.add("d-none")
-    document.getElementById("ٍtaboukCities").classList.add("d-none")
+    document.getElementById("taboukCities").classList.add("d-none")
     document.getElementById("najranCities").classList.add("d-none")
     document.getElementById("jazanCities").classList.add("d-none")
 
@@ -398,7 +399,7 @@ function provinceFilter()
       var selectedCity = document.getElementById("madinahCities");
       selectedCityText = selectedCity.options[selectedCity.selectedIndex].text;
       localStorage.setItem("newSaloonCity", selectedCityText);
-      console.log(selectedCityText)
+      console.log(selectedCityText);
       });
     console.log(selectedProvinceText)
   }
@@ -457,7 +458,7 @@ function provinceFilter()
       var selectedCity = document.getElementById("qassimCities");
       selectedCityText = selectedCity.options[selectedCity.selectedIndex].text;
       localStorage.setItem("newSaloonCity", selectedCityText);
-      console.log(selectedCityText)
+      console.log(selectedCityText);
       });
     console.log(selectedProvinceText)
   }
@@ -516,7 +517,7 @@ function provinceFilter()
         var selectedCity = document.getElementById("taboukCities");
         selectedCityText = selectedCity.options[selectedCity.selectedIndex].text;
         localStorage.setItem("newSaloonCity", selectedCityText);
-        console.log(selectedCityText)
+        console.log(selectedCityText);
       });
       console.log(selectedProvinceText)
   }
@@ -575,7 +576,7 @@ function provinceFilter()
         var selectedCity = document.getElementById("najranCities");
         selectedCityText = selectedCity.options[selectedCity.selectedIndex].text;
         localStorage.setItem("newSaloonCity", selectedCityText);
-        console.log(selectedCityText)
+        console.log(selectedCityText);
       });
     console.log(selectedProvinceText)
   }
@@ -634,7 +635,7 @@ function provinceFilter()
         var selectedCity = document.getElementById("jazanCities");
         selectedCityText = selectedCity.options[selectedCity.selectedIndex].text;
         localStorage.setItem("newSaloonCity", selectedCityText);
-        console.log(selectedCityText)
+        console.log(selectedCityText);
       });
     console.log(selectedProvinceText)
   }
@@ -689,6 +690,7 @@ function provinceFilter()
     console.log(selectedProvinceText)
   }
 }
+//////////////////////////////////  Vlidation Code  /////////////////////////////////////
 
 let nameIsValid = false;
 let emailIsValid = false;
@@ -696,24 +698,31 @@ let passwordIsValid = false;
 let provinceIsValid = false;
 let cityIsValid = false;
 
-document.getElementById("newSaloonName").addEventListener('input', function(){
-  if (document.getElementById("newSaloonName").value != "")
-    {
-      document.getElementById("required1").classList.add("d-none");
-      document.getElementById("required11").classList.remove("d-none");
-      nameIsValid = true;
-    }
-  else
-    {
-      document.getElementById("required1").classList.remove("d-none");
-      document.getElementById("required11").classList.add("d-none");
-      nameIsValid = false;
-    }
-});
-document.getElementById("email").addEventListener('input', function()
+document.getElementById("newSaloonName").addEventListener('input', validateName);
+
+function validateName()
 {
-  let enteredEmail = document.getElementById("email").value;
-  let emailFormat = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (document.getElementById("newSaloonName").value != "")
+  {
+    document.getElementById("required1").classList.add("d-none");
+    document.getElementById("required11").classList.remove("d-none");
+    nameIsValid = true;
+  }
+else
+  {
+    document.getElementById("required1").classList.remove("d-none");
+    document.getElementById("required11").classList.add("d-none");
+    nameIsValid = false;
+  }
+}
+
+document.getElementById("email").addEventListener('input', validateEmail);
+
+function validateEmail()
+  {
+    document.getElementById("required2").innerText = "*Required";
+    let enteredEmail = document.getElementById("email").value;
+    let emailFormat = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   if (enteredEmail.match(emailFormat))
     {
@@ -729,10 +738,12 @@ document.getElementById("email").addEventListener('input', function()
       document.getElementById("required22").classList.add("d-none");
       emailIsValid = false;
     }
+  }
+document.getElementById("password").addEventListener('input', validatePassword);
 
-});
-document.getElementById("password").addEventListener('input', function(){
-  if (document.getElementById("password").value.length >= 6)
+function validatePassword()
+  {
+    if (document.getElementById("password").value.length >= 6)
     {
       document.getElementById("required3").classList.add("d-none");
       document.getElementById("required33").classList.remove("d-none");
@@ -744,9 +755,13 @@ document.getElementById("password").addEventListener('input', function(){
       document.getElementById("required33").classList.add("d-none");
       passwordIsValid = false;
     }
-});
-document.querySelector(".form-select-province").addEventListener('change', function(){
-  if (document.querySelector(".form-select-province").value >= 1)
+  }
+
+document.querySelector(".form-select-province").addEventListener('change', validateProvince);
+
+function validateProvince()
+  {
+    if (document.querySelector(".form-select-province").value >= 1)
     {
       document.getElementById("required4").classList.add("d-none");
       document.getElementById("required44").classList.remove("d-none");
@@ -762,9 +777,13 @@ document.querySelector(".form-select-province").addEventListener('change', funct
       document.getElementById("required55").classList.add("d-none");
       provinceIsValid = false;
     }
-});
-document.getElementById("easternCities").addEventListener('change', function(){
-  if (document.getElementById("easternCities").value >= 1)
+  }
+
+document.getElementById("easternCities").addEventListener('change', validateEasternCities);
+
+function validateEasternCities()
+  {
+    if (document.getElementById("easternCities").value >= 1)
     {
       document.getElementById("required5").classList.add("d-none");
       document.getElementById("required55").classList.remove("d-none");
@@ -776,9 +795,13 @@ document.getElementById("easternCities").addEventListener('change', function(){
       document.getElementById("required55").classList.add("d-none");
       cityIsValid = false;
     }
-});
-document.getElementById("haelCities").addEventListener('change', function(){
-  if (document.getElementById("haelCities").value >= 1)
+  }
+
+document.getElementById("haelCities").addEventListener('change', validateHaelCities);
+
+function validateHaelCities()
+  {
+    if (document.getElementById("haelCities").value >= 1)
     {
       document.getElementById("required5").classList.add("d-none");
       document.getElementById("required55").classList.remove("d-none");
@@ -790,9 +813,13 @@ document.getElementById("haelCities").addEventListener('change', function(){
       document.getElementById("required55").classList.add("d-none");
       cityIsValid = false;
     }
-});
-document.getElementById("makkahCities").addEventListener('change', function(){
-  if (document.getElementById("makkahCities").value >= 1)
+  }
+
+document.getElementById("makkahCities").addEventListener('change', validateMakkahCities);
+
+function validateMakkahCities()
+  {
+    if (document.getElementById("makkahCities").value >= 1)
     {
       document.getElementById("required5").classList.add("d-none");
       document.getElementById("required55").classList.remove("d-none");
@@ -804,8 +831,12 @@ document.getElementById("makkahCities").addEventListener('change', function(){
       document.getElementById("required55").classList.add("d-none");
       cityIsValid = false;
     }
-});
-document.getElementById("aseerCities").addEventListener('change', function(){
+  }
+
+document.getElementById("aseerCities").addEventListener('change', validateAseerCities);
+
+function validateAseerCities()
+{
   if (document.getElementById("aseerCities").value >= 1)
     {
       document.getElementById("required5").classList.add("d-none");
@@ -818,9 +849,13 @@ document.getElementById("aseerCities").addEventListener('change', function(){
       document.getElementById("required55").classList.add("d-none");
       cityIsValid = false;
     }
-});
-document.getElementById("riyadhCities").addEventListener('change', function(){
-  if (document.getElementById("riyadhCities").value >= 1)
+}
+
+document.getElementById("riyadhCities").addEventListener('change', validateRiyadhCities);
+
+function validateRiyadhCities()
+  {
+    if (document.getElementById("riyadhCities").value >= 1)
     {
       document.getElementById("required5").classList.add("d-none");
       document.getElementById("required55").classList.remove("d-none");
@@ -832,9 +867,13 @@ document.getElementById("riyadhCities").addEventListener('change', function(){
       document.getElementById("required55").classList.add("d-none");
       cityIsValid = false;
     }
-});
-document.getElementById("madinahCities").addEventListener('change', function(){
-  if (document.getElementById("madinahCities").value >= 1)
+  }
+
+document.getElementById("madinahCities").addEventListener('change', validateMadinahCities);
+
+function validateMadinahCities()
+  {
+    if (document.getElementById("madinahCities").value >= 1)
     {
       document.getElementById("required5").classList.add("d-none");
       document.getElementById("required55").classList.remove("d-none");
@@ -846,9 +885,13 @@ document.getElementById("madinahCities").addEventListener('change', function(){
       document.getElementById("required55").classList.add("d-none");
       cityIsValid = false;
     }
-});
-document.getElementById("qassimCities").addEventListener('change', function(){
-  if (document.getElementById("qassimCities").value >= 1)
+  }
+
+document.getElementById("qassimCities").addEventListener('change', validateQassimCities);
+
+function validateQassimCities()
+  {
+    if (document.getElementById("qassimCities").value >= 1)
     {
       document.getElementById("required5").classList.add("d-none");
       document.getElementById("required55").classList.remove("d-none");
@@ -860,8 +903,12 @@ document.getElementById("qassimCities").addEventListener('change', function(){
       document.getElementById("required55").classList.add("d-none");
       cityIsValid = false;
     }
-});
-document.getElementById("taboukCities").addEventListener('change', function(){
+  }
+
+document.getElementById("taboukCities").addEventListener('change', validateTaboukCities);
+
+function validateTaboukCities()
+{
   if (document.getElementById("taboukCities").value >= 1)
     {
       document.getElementById("required5").classList.add("d-none");
@@ -874,9 +921,13 @@ document.getElementById("taboukCities").addEventListener('change', function(){
       document.getElementById("required55").classList.add("d-none");
       cityIsValid = false;
     }
-});
-document.getElementById("najranCities").addEventListener('change', function(){
-  if (document.getElementById("najranCities").value >= 1)
+}
+
+document.getElementById("najranCities").addEventListener('change', validateNajranCities);
+
+function validateNajranCities()
+  {
+    if (document.getElementById("najranCities").value >= 1)
     {
       document.getElementById("required5").classList.add("d-none");
       document.getElementById("required55").classList.remove("d-none");
@@ -888,9 +939,13 @@ document.getElementById("najranCities").addEventListener('change', function(){
       document.getElementById("required55").classList.add("d-none");
       cityIsValid = false;
     }
-});
-document.getElementById("jazanCities").addEventListener('change', function(){
-  if (document.getElementById("jazanCities").value >= 1)
+  }
+
+document.getElementById("jazanCities").addEventListener('change', validateJazanCities);
+
+function validateJazanCities()
+  {
+    if (document.getElementById("jazanCities").value >= 1)
     {
       document.getElementById("required5").classList.add("d-none");
       document.getElementById("required55").classList.remove("d-none");
@@ -902,7 +957,8 @@ document.getElementById("jazanCities").addEventListener('change', function(){
       document.getElementById("required55").classList.add("d-none");
       cityIsValid = false;
     }
-});
+  }
+
 $("#createAccount").click(function(){
   var email = $("#email").val();
   var password = $("#password").val();
@@ -923,52 +979,58 @@ newSaloonProvince != "" && provinceIsValid && newSaloonCity != "" && cityIsValid
       var errorCode = error.code;
       var errorMessage = error.message;
       console.log(errorMessage);
+      if(errorMessage == "The email address is already in use by another account.")
+      {
+        document.getElementById("required2").innerText = "The email address is already in use by another account";
+        document.getElementById("required2").style.color  =  "red";
+        document.getElementById("required2").style.fontSize  =  "14px";
+        document.getElementById("required2").classList.remove("d-none");
+        document.getElementById("required22").classList.add("d-none");
+      }
+      
+      
     });
 }
+
 if(newSaloonName == "")
 {
   document.getElementById("required1").style.color = "red";
-}
-if(newSaloonName != "")
-{
-  document.getElementById("required1").classList.add = "d-none";
+  validateName();
 }
 
-if(email == "")
+if(!emailIsValid)
 {
   document.getElementById("required2").style.color = "red";
-}
-if(email != "")
-{
-  document.getElementById("required2").style.color = "white";
+  validateEmail();
 }
 
-if(password == "")
+if(!passwordIsValid)
 {
   document.getElementById("required3").style.color = "red";
-}
-if(password != "")
-{
-  document.getElementById("required3").style.color = "white";
+  validatePassword();
 }
 
-if(selectedProvinceValue <= 1)
+if(!provinceIsValid)
 {
   document.getElementById("required4").style.color = "red";
-}
-if(selectedProvinceText > 1)
-{
-  document.getElementById("required4").style.color = "white";
+  validateProvince();
 }
 
-if(selectedCityValue <= 1)
+if(!cityIsValid)
 {
   document.getElementById("required5").style.color = "red";
+  validateEasternCities();
+  validateHaelCities();
+  validateJazanCities();
+  validateMadinahCities();
+  validateNajranCities();
+  validateRiyadhCities();
+  validateTaboukCities();
+  validateQassimCities();
+  validateAseerCities();
+  validateMakkahCities();
 }
-if(selectedCityValue >1)
-{
-  document.getElementById("required5").style.color = "white";
-}
+
 // else
 // {
 //   alert("Please fill in all empty fields");
