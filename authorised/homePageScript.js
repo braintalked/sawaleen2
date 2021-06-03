@@ -1049,6 +1049,8 @@ else if(cityText == "جبة")
     }
   });
 }
+
+// Makkah cities
 else if(cityText == "الطائف")
 {
   selectedProvinceSalons.forEach(function(item){
@@ -1083,6 +1085,58 @@ else if(cityText == "مكة المكرمة")
       item.classList.add("d-none");
     }
     if (item.classList.contains('مكة المكرمة'))
+    {
+      item.classList.remove("d-none");
+    }
+  });
+}
+else if(cityText == "رابغ")
+{
+  selectedProvinceSalons.forEach(function(item){
+    if (!item.classList.contains('رابغ'))
+    {
+      item.classList.add("d-none");
+    }
+    if (item.classList.contains('رابغ'))
+    {
+      item.classList.remove("d-none");
+    }
+  });
+}
+else if(cityText == "القنفذة")
+{
+  selectedProvinceSalons.forEach(function(item){
+    if (!item.classList.contains('القنفذة'))
+    {
+      item.classList.add("d-none");
+    }
+    if (item.classList.contains('القنفذة'))
+    {
+      item.classList.remove("d-none");
+    }
+  });
+}
+else if(cityText == "الليث")
+{
+  selectedProvinceSalons.forEach(function(item){
+    if (!item.classList.contains('الليث'))
+    {
+      item.classList.add("d-none");
+    }
+    if (item.classList.contains('الليث'))
+    {
+      item.classList.remove("d-none");
+    }
+  });
+}
+else if(cityText == "خليص")
+{
+  selectedProvinceSalons.forEach(function(item){
+    if (!item.classList.contains('خليص'))
+    {
+      item.classList.add("d-none");
+    }
+    if (item.classList.contains('خليص'))
     {
       item.classList.remove("d-none");
     }
