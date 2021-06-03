@@ -12,7 +12,7 @@ function uuidv4() {
 }
 
 let barberID = localStorage.getItem("barberID");
-let checkboxesCollection = [];
+let checkBoxesCollection = [];
 let clientRequestedServices = [];
 let clientName = "";
 let clientPhone = "";
@@ -20,16 +20,15 @@ let clientPhone = "";
 let barberTarget = ""
 let clientOrder ={};
 
-console.log("length is : "+document.querySelectorAll(".serviceCheckbox").length);
+console.log(document.querySelectorAll(".serviceCheckbox").length);
 document.querySelectorAll(".serviceCheckbox").forEach(chechBoxesCollection)
 
 function chechBoxesCollection(item)
 {
   console.log("pushed");
-  checkboxesCollection.push(item);
-  console.log(item);
+  checkBoxesCollection.push(item);
 }
-for(i=1;i<=checkboxesCollection.length;i++)
+for(i=1;i<=checkBoxesCollection.length;i++)
 {
   var checkboxNumber = "#checkbox"+i
   document.querySelector(checkboxNumber).addEventListener('change', function()
@@ -37,7 +36,6 @@ for(i=1;i<=checkboxesCollection.length;i++)
     let label = "#label"+(this.id);
     if (this.checked)
       {
-        console.log(label);
         clientRequestedServices.push(document.querySelector(label).textContent);
         console.log(document.querySelector(label).textContent+"  is added to array");
         console.log(clientRequestedServices+" ARE REQUESTED");
@@ -51,7 +49,6 @@ for(i=1;i<=checkboxesCollection.length;i++)
       }
   });
 }
-
       // name and phone inputs validation code
 
       var nameIsValid = false;
@@ -64,7 +61,7 @@ for(i=1;i<=checkboxesCollection.length;i++)
             document.getElementById("required1").classList.add("d-none");
             document.getElementById("required11").classList.remove("d-none");
             nameIsValid = true;
-            console.log("valid name format");
+            console.log(nameIsValid);
           }
         else
           {
@@ -80,6 +77,8 @@ for(i=1;i<=checkboxesCollection.length;i++)
         let arabicRegexFormat = /^[+]*[(]{0,1}[\u0030-\u0039\u0660-\u0669]{1,3}[)]{0,1}[\./\u0030-\u0039\u0660-\u0669]*$/g;
         let englishRegexFormat = /^[+]*[(]{0,1}[\u0030-\u0039\u0660-\u0669]{1,3}[)]{0,1}[\./\u0030-\u0039\u0660-\u0669]*$/g;
            
+            console.log(phoneIsValid);
+
             // check phone if  input number contains non-number characters  
                 if ((enteredPhone.match(arabicRegexFormat) || enteredPhone.match(englishRegexFormat)) && enteredPhone != "")
                 {
@@ -108,20 +107,22 @@ for(i=1;i<=checkboxesCollection.length;i++)
                 }
     
       });
-document.getElementById("bookingButton").addEventListener("click", function()
+document.querySelector("#bookingButton").addEventListener("click", function()
   {
           
     if (nameIsValid && phoneIsValid)
     {
+      let clientID = uuidv4();
+
       console.log("name and phone are valid...");
       clientName = document.querySelector("#nameInput").value;
       console.log("name: "+clientName);
       clientPhone = document.querySelector("#phoneInput").value;
       console.log("phone: "+clientPhone);
-      clientOrder ={saloonID:barberID, clientName:clientName, clientPhone:clientPhone, clientRequestedServices:clientRequestedServices};
+      clientOrder ={clientID:clientID, saloonID:barberID, clientName:clientName, clientPhone:clientPhone, clientRequestedServices:clientRequestedServices};
       console.log(clientOrder);
 
-      let clientID = uuidv4();
+      
       let barberProfile = {};
 
       let key = clientID;
