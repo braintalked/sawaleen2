@@ -1,2080 +1,296 @@
+<!DOCTYPE html>
+<!-- <script type="module">
+  import { v4 as uuidv4 } from './uuid';
+  let u = uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
 
-let selectedProvinceSalons = [];
+</script> -->
+<html lang="ar" dir="rtl">
+  <head>
+      <!-- Sweetalert2 Module -->
+      <script src="nodemodules/sweetalert2/dist/sweetalert2.all.js"></script>
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+      <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
+      <!-- Firebase Storage CDN -->
+      <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+      <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDjsKQlqNRWOWD6Qw6tklqtP03BtUW_lqw",
+            authDomain: "groceryapp-b381a.firebaseapp.com",
+            databaseURL: "https://groceryapp-b381a.firebaseio.com",
+            projectId: "groceryapp-b381a",
+            storageBucket: "groceryapp-b381a.appspot.com",
+            messagingSenderId: "1092044916930",
+            appId: "1:1092044916930:web:b3493c5ddfdef83633d35b",
+            storageBucket: 'gs://groceryapp-b381a.appspot.com'
+        };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      var db = firebase.firestore();
+      </script>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
 
-document.getElementById("easternCities").classList.remove("d-none")
-document.getElementById("easternCities").disabled = true;
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" charset="utf-8"/>
+      <!-- Bootstrap RTL CSS -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.rtl.min.css" integrity="sha384-jHiSqEim4+W1UCvv8kTcMbtCZlRF8MxbgKdfpvncia8gdN1UImBnhTpKtufREzv7" crossorigin="anonymous">      <!-- Bootstrap css & javascript links -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <!-- CSS Style File -->
+      <link rel="stylesheet" href="styles.css">
+      <!-- Font Awesome for All Icons other than the quantity buttons-->
+      <script src="https://kit.fontawesome.com/ab5937a0f1.js" crossorigin="anonymous"></script>
+      <!-- Font Awesome fpr Quantity Buttons-->
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+      <!-- Google Fonts / Arabic -->
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa&display=swap" rel="stylesheet">      <!-- JQuery -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <!-- FIREBASE -->
+  </head>
+<body>
+    <!-- ////////////////////////////////////// START NAVIGATION BAR ////////////////////////////////////////// -->
+            <nav class="navbar navbar-expand-lg navbar-light fixed-top border border-dark" style="padding: 5px; background-color: #fff;">
+              <a id="logoFont" class="navbar-brand" href="index.html" style="color: rgb(255, 92, 57); font-weight: bold; font-size: 2rem; margin-left: 35px;">صوالين</a>
+                <div class="checkoutMobile myCart mr-5">
+                  <a href="boughtMaterials.html">
+                    <!-- <div class="checkoutBadge">0</div> -->
+                    <!-- <i class="fas fa-2x fa-shopping-cart shopping-cart-icon"></i> -->
+                  </a>
+                </div>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+              </ul>
+                <li class="nav-item d-flex" style="margin-left: auto;">
+                  <!-- <i class="fas fa-2x fa-shopping-cart checkoutDesktop"></i><span id="totalCost">11</span></div> -->
+                  <div class="checkoutDesktop myCart mr-5 text-center">
+                    <a href="boughtMaterials.html">
+                      <!-- <div class="checkoutBadge">0</div> -->
+                      <!-- <i class="fas fa-2x fa-shopping-cart shopping-cart-icon"></i> -->
+                    </a>
+                  </div>
+                </li>
+                
+                <button type="button" class="btn btn-outline-warning signup" id="salonLoginOrRegisterButton" name="button" style="color:black;">Salons</button>
 
-document.querySelector(".form-select-province").addEventListener("change", provinceFilter);
-document.getElementById("easternCities").addEventListener("change", cityFilter);
-document.getElementById("haelCities").addEventListener("change", cityFilter);
-document.getElementById("makkahCities").addEventListener("change", cityFilter);
-document.getElementById("riyadhCities").addEventListener("change", cityFilter);
-document.getElementById("aseerCities").addEventListener("change", cityFilter);
-document.getElementById("madinahCities").addEventListener("change", cityFilter);
-document.getElementById("qassimCities").addEventListener("change", cityFilter);
-document.getElementById("taboukCities").addEventListener("change", cityFilter);
-document.getElementById("najranCities").addEventListener("change", cityFilter);
-document.getElementById("jazanCities").addEventListener("change", cityFilter);
-
-function provinceFilter()
-{
-  console.log("inside homePageScript.js!")
-  var selectedProvince = document.querySelector(".form-select-province")
-  var value = selectedProvince.options[selectedProvince.selectedIndex].value;// get selected option value
-  var text = selectedProvince.options[selectedProvince.selectedIndex].text;
-  if(text == "المنطقة الشرقية")
-  {
-    console.log("eastern selected")
-    selectedProvinceSalons = [];
-
-    document.getElementById("easternCities").disabled = false;
-    document.getElementById("haelCities").selectedIndex = 0;
-    document.getElementById("makkahCities").selectedIndex = 0;
-    document.getElementById("aseerCities").selectedIndex = 0;
-    document.getElementById("riyadhCities").selectedIndex = 0;
-    document.getElementById("madinahCities").selectedIndex = 0;
-    document.getElementById("qassimCities").selectedIndex = 0;
-    document.getElementById("taboukCities").selectedIndex = 0;
-    document.getElementById("najranCities").selectedIndex = 0;
-    document.getElementById("jazanCities").selectedIndex = 0;
-
-    document.getElementById("easternCities").classList.remove("d-none")
-    document.getElementById("makkahCities").classList.add("d-none")
-    document.getElementById("haelCities").classList.add("d-none")
-    document.getElementById("aseerCities").classList.add("d-none")
-    document.getElementById("riyadhCities").classList.add("d-none")
-    document.getElementById("madinahCities").classList.add("d-none")
-    document.getElementById("qassimCities").classList.add("d-none")
-    document.getElementById("taboukCities").classList.add("d-none")
-    document.getElementById("najranCities").classList.add("d-none")
-    document.getElementById("jazanCities").classList.add("d-none")
-
-    document.querySelectorAll(".eastern").forEach(showElement);
-    document.querySelectorAll(".eastern").forEach(appendToSelectedSalons);
-
-    document.querySelectorAll(".makkah").forEach(hideElement);
-
-    document.querySelectorAll(".hael").forEach(hideElement);
-
-    document.querySelectorAll(".aseer").forEach(hideElement);
-
-    document.querySelectorAll(".riyadh").forEach(hideElement);
-
-    document.querySelectorAll(".madinah").forEach(hideElement);
-
-    document.querySelectorAll(".qassim").forEach(hideElement);
-
-    document.querySelectorAll(".tabouk").forEach(hideElement);
-
-    document.querySelectorAll(".najran").forEach(hideElement);
-
-    document.querySelectorAll(".jazan").forEach(hideElement);
-
-    function hideElement(elem)
-      {
-        elem.classList.add("d-none");
-      }
-    function showElement(elem)
-      {
-          elem.classList.remove("d-none");
-      }
-      function appendToSelectedSalons(elem)
-      {
-        selectedProvinceSalons.push(elem);
-      }
-      console.log(text);
-      console.log(selectedProvinceSalons);
-    }
-  else if(text == "حائل")
-  {
-    selectedProvinceSalons = [];
-
-    document.getElementById("easternCities").selectedIndex = 0;
-    document.getElementById("makkahCities").selectedIndex = 0;
-    document.getElementById("aseerCities").selectedIndex = 0;
-    document.getElementById("riyadhCities").selectedIndex = 0;
-    document.getElementById("madinahCities").selectedIndex = 0;
-    document.getElementById("qassimCities").selectedIndex = 0;
-    document.getElementById("taboukCities").selectedIndex = 0;
-    document.getElementById("najranCities").selectedIndex = 0;
-    document.getElementById("jazanCities").selectedIndex = 0;
-
-    document.getElementById("haelCities").classList.remove("d-none")
-    document.getElementById("easternCities").classList.add("d-none")
-    document.getElementById("makkahCities").classList.add("d-none")
-    document.getElementById("aseerCities").classList.add("d-none")
-    document.getElementById("riyadhCities").classList.add("d-none")
-    document.getElementById("madinahCities").classList.add("d-none")
-    document.getElementById("qassimCities").classList.add("d-none")
-    document.getElementById("taboukCities").classList.add("d-none")
-    document.getElementById("najranCities").classList.add("d-none")
-    document.getElementById("jazanCities").classList.add("d-none")
-
-    document.querySelectorAll(".hael").forEach(showElement);
-    document.querySelectorAll(".hael").forEach(appendToSelectedSalons);
-
-    document.querySelectorAll(".makkah").forEach(hideElement);
-
-    document.querySelectorAll(".eastern").forEach(hideElement);
-
-    document.querySelectorAll(".aseer").forEach(hideElement);
-
-    document.querySelectorAll(".riyadh").forEach(hideElement);
-
-    document.querySelectorAll(".madinah").forEach(hideElement);
-
-    document.querySelectorAll(".qassim").forEach(hideElement);
-
-    document.querySelectorAll(".tabouk").forEach(hideElement);
-    
-    document.querySelectorAll(".najran").forEach(hideElement);
-
-    document.querySelectorAll(".jazan").forEach(hideElement);
-
-    function hideElement(elem)
-      {
-        elem.classList.add("d-none");
-      }
-    function showElement(elem)
-      {
-          elem.classList.remove("d-none");
-      }
-      function appendToSelectedSalons(elem)
-      {
-        selectedProvinceSalons.push(elem);
-      }
-      console.log(text);
-      console.log(selectedProvinceSalons);
-    }
-  else if(text == "مكة المكرمة")
-  {
-    selectedProvinceSalons = [];
-
-    document.getElementById("haelCities").selectedIndex = 0;
-    document.getElementById("easternCities").selectedIndex = 0;
-    document.getElementById("aseerCities").selectedIndex = 0;
-    document.getElementById("riyadhCities").selectedIndex = 0;
-    document.getElementById("madinahCities").selectedIndex = 0;
-    document.getElementById("qassimCities").selectedIndex = 0;
-    document.getElementById("taboukCities").selectedIndex = 0;
-    document.getElementById("najranCities").selectedIndex = 0;
-    document.getElementById("jazanCities").selectedIndex = 0;
-
-    document.getElementById("makkahCities").classList.remove("d-none")
-    document.getElementById("easternCities").classList.add("d-none")
-    document.getElementById("haelCities").classList.add("d-none")
-    document.getElementById("aseerCities").classList.add("d-none")
-    document.getElementById("riyadhCities").classList.add("d-none")
-    document.getElementById("madinahCities").classList.add("d-none")
-    document.getElementById("qassimCities").classList.add("d-none")
-    document.getElementById("taboukCities").classList.add("d-none")
-    document.getElementById("najranCities").classList.add("d-none")
-    document.getElementById("jazanCities").classList.add("d-none")
-
-    document.querySelectorAll(".makkah").forEach(showElement);
-    document.querySelectorAll(".makkah").forEach(appendToSelectedSalons);
-
-    document.querySelectorAll(".eastern").forEach(hideElement);
-
-    document.querySelectorAll(".hael").forEach(hideElement);
- 
-    document.querySelectorAll(".aseer").forEach(hideElement);
-
-    document.querySelectorAll(".riyadh").forEach(hideElement);
-
-    document.querySelectorAll(".madinah").forEach(hideElement);
-
-    document.querySelectorAll(".qassim").forEach(hideElement);
-
-    document.querySelectorAll(".tabouk").forEach(hideElement);
-
-    document.querySelectorAll(".najran").forEach(hideElement);
-
-    document.querySelectorAll(".jazan").forEach(hideElement);
-
-      function hideElement(elem)
-        {
-          elem.classList.add("d-none");
-        }
-      function showElement(elem)
-        {
-            elem.classList.remove("d-none");
-        }
-        function appendToSelectedSalons(elem)
-        {
-          selectedProvinceSalons.push(elem);
-        }
-    console.log(text);
-    console.log(selectedProvinceSalons);
-  }
-  else if(text == "عسير")
-  {
-    selectedProvinceSalons = [];
-
-    document.getElementById("easternCities").selectedIndex = 0;
-    document.getElementById("makkahCities").selectedIndex = 0;
-    document.getElementById("haelCities").selectedIndex = 0;
-    document.getElementById("riyadhCities").selectedIndex = 0;
-    document.getElementById("madinahCities").selectedIndex = 0;
-    document.getElementById("qassimCities").selectedIndex = 0;
-    document.getElementById("taboukCities").selectedIndex = 0;
-    document.getElementById("najranCities").selectedIndex = 0;
-    document.getElementById("jazanCities").selectedIndex = 0;
-
-    document.getElementById("aseerCities").classList.remove("d-none")
-    document.getElementById("easternCities").classList.add("d-none")
-    document.getElementById("haelCities").classList.add("d-none")
-    document.getElementById("makkahCities").classList.add("d-none")
-    document.getElementById("riyadhCities").classList.add("d-none")
-    document.getElementById("madinahCities").classList.add("d-none")
-    document.getElementById("qassimCities").classList.add("d-none")
-    document.getElementById("taboukCities").classList.add("d-none")
-    document.getElementById("najranCities").classList.add("d-none")
-    document.getElementById("jazanCities").classList.add("d-none")
-
-    document.querySelectorAll(".aseer").forEach(showElement);
-
-    document.querySelectorAll(".aseer").forEach(appendToSelectedSalons);
-
-    document.querySelectorAll(".makkah").forEach(hideElement);
-
-    document.querySelectorAll(".hael").forEach(hideElement);
+                <!-- <button type="button" class="btn btn-warning signup" id="signupButton" name="button" style="color:black;">إنشاء حساب</button>
+                <button type="button" class="btn btn-outline-warning signin" id="signinButton" name="button" style="color:black;">تسجيل دخول</button> -->
+                </div>
+            </nav>
+        <!-- ///////////////////////////////// END NAVIGATION BAR //////////////////////////////////// -->
   
-    document.querySelectorAll(".eastern").forEach(hideElement);
+    <!-- Start loading animation -->
+      <div class="loadingAnimation">  
+        <div class="dots one">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+    <!-- End loading  animation  -->
 
-    document.querySelectorAll(".riyadh").forEach(hideElement);
+    <div class="container-fluid">
+        <div  id="searchBoxRow" class="row" style="margin-top: 70px; background-image: url(images/background_image1.jpg); background-repeat: repeat; background-position: center;">
+          <div class="col-sm-4 col-md-4 col-lg-3 mx-auto my-auto">
+            <div class="card mb-2 mx-auto my-auto" style="width: 250px;">
+              <div class="card-body">
+               
+                <select class="form-select form-select-province mb-3" aria-label=".form-select-province example">
+                  <option selected>المنطقة</option>
+                  <option value="1">الرياض</option>
+                  <option value="2">مكة المكرمة</option>
+                  <option value="3">المدينة المنورة</option>
+                  <option value="4">القصيم</option>
+                  <option value="5">المنطقة الشرقية</option>
+                  <option value="6">عسير</option>
+                  <option value="7">تبوك</option>
+                  <option value="8">حائل</option>
+                  <!-- <option value="9">الحدود الشمالية</option> -->
+                  <option value="10">جازان</option>
+                  <option value="11">نجران</option>
+                  <!-- <option value="12">الباحة</option> -->
+                  <!-- <option value="13">الجوف</option> -->
+                </select>
 
-    document.querySelectorAll(".madinah").forEach(hideElement);
+                <select class="form-select form-select-city" id="easternCities" aria-label=".form-select-city example" disabled>
+                  <option selected>المدينة / الحي</option>
+                  <option value="1">الظهران</option>
+                  <option value="2">الخبر</option>
+                  <option value="3">الدمام</option>
+                  <option value="4">الجبيل</option>
+                  <option value="5">القطيف</option>
+                  <option value="6">الأحساء</option>
+                  <option value="7">حفر الباطن</option>
+                  <option value="8">الخفجي</option>
+                  <option value="9">النعيرية</option>
+                </select>
 
-    document.querySelectorAll(".qassim").forEach(hideElement);
+                <select class="form-select form-select-city d-none" id="haelCities" aria-label=".form-select-city example">
+                  <option selected>المدينة / الحي</option>
+                  <option value="1">مدينة حائل</option>
+                  <option value="2">بقعاء</option>
+                  <option value="3">قفار</option>
+                  <option value="4">الغزالة</option>
+                  <option value="5">الشنان</option>
+                  <option value="6">موقق</option>
+                  <option value="7">الحائط</option>
+                  <option value="8">السليمي</option>
+                  <option value="9">الشملي</option>                             
+                  <option value="10">سميراء</option>
+                  <option value="11">حليفة</option>
+                  <option value="12">جبة</option>
+                </select>
+                
+                <select class="form-select form-select-city d-none" id="makkahCities" aria-label=".form-select-city example">
+                  <option selected>المدينة / الحي</option>
+                  <option value="1">مكة المكرمة</option>
+                  <option value="2">جدة</option>
+                  <option value="3">الطائف</option>
+                  <option value="4">القنفذة</option>
+                  <option value="5">رابغ</option>
+                  <option value="6">الليث</option>
+                  <option value="7">خليص</option>
+                </select>
 
-    document.querySelectorAll(".tabouk").forEach(hideElement);
+                <select class="form-select form-select-city d-none" id="aseerCities" aria-label=".form-select-city example">
+                  <option selected>المدينة / الحي</option>
+                  <option value="1">أبها</option>
+                  <option value="2">خميس مشيط</option>
+                  <option value="3">النماص</option>
+                  <option value="4">تنومة</option>
+                  <option value="5">ظهران الجنوب</option>
+                  <option value="6">رجال ألمع</option>
+                </select>
 
-    document.querySelectorAll(".najran").forEach(hideElement);
+                <select class="form-select form-select-city d-none" id="riyadhCities" aria-label=".form-select-city example">
+                  <option selected>المدينة / الحي</option>
+                  <option value="1">شمال الرياض</option>
+                  <option value="2">شرق الرياض</option>
+                  <option value="3">غرب الرياض</option>
+                  <option value="4">جنوب الرياض</option>
+                  <option value="5">وسط الرياض</option>
+                </select>
 
-    document.querySelectorAll(".jazan").forEach(hideElement);
+                <select class="form-select form-select-city d-none" id="madinahCities" aria-label=".form-select-city example">
+                  <option selected>المدينة / الحي</option>
+                  <option value="1">المدينة المنورة</option>
+                  <option value="2">الحناكية</option>
+                  <option value="3">العلا</option>
+                  <option value="4">ينبع</option>
+                  <option value="5">ينبع الصناعية</option>
+                </select>
 
-      function hideElement(elem)
-        {
-          elem.classList.add("d-none");
+                <select class="form-select form-select-city d-none" id="qassimCities" aria-label=".form-select-city example">
+                  <option selected>المدينة / الحي</option>
+                  <option value="1">بريدة</option>
+                  <option value="2">عنيزة</option>
+                  <option value="3">الرس</option>
+                  <option value="4">المذنب</option>
+                  <option value="5">البكيرية</option>
+                  <option value="6">البدائع</option>
+                  <option value="7">الأسياح</option>
+                  <option value="8">النبهانية</option>
+                  <option value="9">عيون الجواء</option>
+                  <option value="10">رياض الخبراء</option>
+                  <option value="11">الشماسية</option>
+                  <option value="12">عقلة الصقور</option>
+                  <option value="13">ضرية</option>
+                </select>
+
+                <select class="form-select form-select-city d-none" id="taboukCities" aria-label=".form-select-city example">
+                  <option selected>المدينة / الحي</option>
+                  <option value="1">تيماء</option>
+                  <option value="2">أملج</option>
+                  <option value="3">الوجه</option>
+                  <option value="4">ضباء</option>
+                  <option value="5">حقل</option>
+                  <option value="6">البدع</option>
+                </select>
+
+                <select class="form-select form-select-city d-none" id="najranCities" aria-label=".form-select-city example">
+                  <option selected>المدينة / الحي</option>
+                  <option value="1">حي الفيصلية</option>
+                  <option value="2">حي الفهد</option>
+                  <option value="3">رجلاء</option>
+                  <option value="4">سقام</option>
+                  <option value="5">المشعلية</option>
+                  <option value="6">الغويلا</option>
+                  <option value="7">الجربة</option>
+                  <option value="8">الصفا</option>
+                  <option value="9">الشرفة</option>
+                  <option value="10">القابل</option>
+                  <option value="11">العريسة</option>
+                  <option value="12">حي الأسكان</option>
+                  <option value="13">شرق المطار</option>
+                  <option value="14">يدمة</option>
+                  <option value="15">حبونا</option>
+                  <option value="16">نجران البلد</option>
+                </select>
+
+                <select class="form-select form-select-city d-none" id="jazanCities" aria-label=".form-select-city example">
+                  <option selected>المدينة / الحي</option>
+                  <option value="1">صبيا</option>
+                  <option value="2">صامطة</option>
+                  <option value="3">أبو عريش</option>
+                  <option value="4">جازان</option>
+                  <option value="5">أحد مسارحة</option>
+                  <option value="6">بيش</option>
+                  <option value="7">العارضة</option>
+                  <option value="8">ضمد</option>
+                  <option value="9">الدرب</option>
+                  <option value="10">العيدابي</option>
+                  <option value="11">الدائر</option>
+                  <option value="12">الريث</option>
+                  <option value="13">الحرث</option>
+                  <option value="14">فرسان</option>
+                  <option value="15">الطوال</option>
+                  <option value="16">هروب</option>
+                  <option value="17">فيفاء</option>
+                 </select>
+                 
+               </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
+          </div>
+        </div>
+      </div>
+      <!-- /////////////////////////////// START  /////////////////////////////-->
+      <div id="saloonProfileCardsContainer" class="container-fluid pl-3 pr-3" style="background-color: #ffffff">
+        <div class="row mt-4">
+          <div class="" id="startAppendingFromHere">
+          </div>
+        </div>
+      </div>
+
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="getSaloonProfiles.js" type="text/javascript"></script>
+  <script src="homePageScript.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+    $("#signinButton").click(function(){
+      window.location.href = "signin.html";
+    });
+    $("#signupButton").click(function(){
+      window.location.href = "signup.html";
+    });
+  </script>
+  <script type="text/javascript">
+    firebase.auth().onAuthStateChanged((user) => {
+    if (user)
+       {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          var uid = user.uid;
+          window.location.replace("authorised/home.html")
         }
-      function showElement(elem)
-        {
-            elem.classList.remove("d-none");
-        }
-        function appendToSelectedSalons(elem)
-        {
-          selectedProvinceSalons.push(elem);
-        }
-      console.log(text);
-      console.log(selectedProvinceSalons);
-  }
-  else if(text == "الرياض")
-  {
-    selectedProvinceSalons = [];
-
-    document.getElementById("easternCities").selectedIndex = 0;
-    document.getElementById("makkahCities").selectedIndex = 0;
-    document.getElementById("aseerCities").selectedIndex = 0;
-    document.getElementById("haelCities").selectedIndex = 0;
-    document.getElementById("madinahCities").selectedIndex = 0;
-    document.getElementById("qassimCities").selectedIndex = 0;
-    document.getElementById("taboukCities").selectedIndex = 0;
-    document.getElementById("najranCities").selectedIndex = 0;
-    document.getElementById("jazanCities").selectedIndex = 0;
-
-    document.getElementById("riyadhCities").classList.remove("d-none")
-    document.getElementById("easternCities").classList.add("d-none")
-    document.getElementById("haelCities").classList.add("d-none")
-    document.getElementById("makkahCities").classList.add("d-none")
-    document.getElementById("aseerCities").classList.add("d-none")
-    document.getElementById("madinahCities").classList.add("d-none")
-    document.getElementById("qassimCities").classList.add("d-none")
-    document.getElementById("taboukCities").classList.add("d-none")
-    document.getElementById("najranCities").classList.add("d-none")
-    document.getElementById("jazanCities").classList.add("d-none")
-
-    document.querySelectorAll(".riyadh").forEach(showElement);
-    document.querySelectorAll(".riyadh").forEach(appendToSelectedSalons);
-
-    document.querySelectorAll(".makkah").forEach(hideElement);
-
-    document.querySelectorAll(".hael").forEach(hideElement);
-
-    document.querySelectorAll(".aseer").forEach(hideElement);
-
-    document.querySelectorAll(".eastern").forEach(hideElement);
-
-    document.querySelectorAll(".madinah").forEach(hideElement);
-
-    document.querySelectorAll(".qassim").forEach(hideElement);
-
-    document.querySelectorAll(".tabouk").forEach(hideElement);
-
-    document.querySelectorAll(".najran").forEach(hideElement);
-
-    document.querySelectorAll(".jazan").forEach(hideElement);
-
-      function hideElement(elem)
-        {
-          elem.classList.add("d-none");
-        }
-      function showElement(elem)
-        {
-            elem.classList.remove("d-none");
-        }
-        function appendToSelectedSalons(elem)
-        {
-          selectedProvinceSalons.push(elem);
-        }
-        console.log(selectedProvinceSalons);
-  }
-  else if(text == "المدينة المنورة")
-  {
-    selectedProvinceSalons = [];
-
-    document.getElementById("easternCities").selectedIndex = 0;
-    document.getElementById("makkahCities").selectedIndex = 0;
-    document.getElementById("aseerCities").selectedIndex = 0;
-    document.getElementById("riyadhCities").selectedIndex = 0;
-    document.getElementById("haelCities").selectedIndex = 0;
-    document.getElementById("qassimCities").selectedIndex = 0;
-    document.getElementById("taboukCities").selectedIndex = 0;
-    document.getElementById("najranCities").selectedIndex = 0;
-    document.getElementById("jazanCities").selectedIndex = 0;
-
-    document.getElementById("madinahCities").classList.remove("d-none")
-    document.getElementById("easternCities").classList.add("d-none")
-    document.getElementById("makkahCities").classList.add("d-none")
-    document.getElementById("aseerCities").classList.add("d-none")
-    document.getElementById("riyadhCities").classList.add("d-none")
-    document.getElementById("haelCities").classList.add("d-none")
-    document.getElementById("qassimCities").classList.add("d-none")
-    document.getElementById("taboukCities").classList.add("d-none")
-    document.getElementById("najranCities").classList.add("d-none")
-    document.getElementById("jazanCities").classList.add("d-none")
-
-    document.querySelectorAll(".madinah").forEach(showElement);
-    document.querySelectorAll(".madinah").forEach(appendToSelectedSalons);
-
-    document.querySelectorAll(".makkah").forEach(hideElement);
-
-    document.querySelectorAll(".eastern").forEach(hideElement);
-
-    document.querySelectorAll(".aseer").forEach(hideElement);
-
-    document.querySelectorAll(".hael").forEach(hideElement);
-
-    document.querySelectorAll(".riyadh").forEach(hideElement);
-
-    document.querySelectorAll(".qassim").forEach(hideElement);
-
-    document.querySelectorAll(".tabouk").forEach(hideElement);
-
-    document.querySelectorAll(".najran").forEach(hideElement);
-
-    document.querySelectorAll(".jazan").forEach(hideElement);
-
-    function hideElement(elem)
-      {
-        elem.classList.add("d-none");
-      }
-    function showElement(elem)
-      {
-        elem.classList.remove("d-none");
-      }
-    function appendToSelectedSalons(elem)
-      {
-        selectedProvinceSalons.push(elem);
-      }
-    console.log(selectedProvinceSalons)
-  }
-  else if(text == "القصيم")
-  {
-    selectedProvinceSalons = [];
-
-    document.getElementById("easternCities").selectedIndex = 0;
-    document.getElementById("makkahCities").selectedIndex = 0;
-    document.getElementById("aseerCities").selectedIndex = 0;
-    document.getElementById("riyadhCities").selectedIndex = 0;
-    document.getElementById("haelCities").selectedIndex = 0;
-    document.getElementById("madinahCities").selectedIndex = 0;
-    document.getElementById("taboukCities").selectedIndex = 0;
-    document.getElementById("najranCities").selectedIndex = 0;
-    document.getElementById("jazanCities").selectedIndex = 0;
-
-    document.getElementById("qassimCities").classList.remove("d-none")
-    document.getElementById("easternCities").classList.add("d-none")
-    document.getElementById("makkahCities").classList.add("d-none")
-    document.getElementById("aseerCities").classList.add("d-none")
-    document.getElementById("riyadhCities").classList.add("d-none")
-    document.getElementById("haelCities").classList.add("d-none")
-    document.getElementById("madinahCities").classList.add("d-none")
-    document.getElementById("taboukCities").classList.add("d-none")
-    document.getElementById("najranCities").classList.add("d-none")
-    document.getElementById("jazanCities").classList.add("d-none")
-
-    document.querySelectorAll(".qassim").forEach(showElement);
-    document.querySelectorAll(".qassim").forEach(appendToSelectedSalons);
-
-    document.querySelectorAll(".makkah").forEach(hideElement);
-
-    document.querySelectorAll(".eastern").forEach(hideElement);
-
-    document.querySelectorAll(".aseer").forEach(hideElement);
-
-    document.querySelectorAll(".hael").forEach(hideElement);
-
-    document.querySelectorAll(".riyadh").forEach(hideElement);
-
-    document.querySelectorAll(".madinah").forEach(hideElement);
-
-    document.querySelectorAll(".tabouk").forEach(hideElement);
-
-    document.querySelectorAll(".najran").forEach(hideElement);
-
-    document.querySelectorAll(".jazan").forEach(hideElement);
-
-    function hideElement(elem)
-      {
-        elem.classList.add("d-none");
-      }
-    function showElement(elem)
-      {
-        elem.classList.remove("d-none");
-      }
-    function appendToSelectedSalons(elem)
-      {
-        selectedProvinceSalons.push(elem);
-      }
-    console.log(selectedProvinceSalons)
-  }
-  else if(text == "تبوك")
-  {
-    selectedProvinceSalons = [];
-
-    document.getElementById("easternCities").selectedIndex = 0;
-    document.getElementById("makkahCities").selectedIndex = 0;
-    document.getElementById("aseerCities").selectedIndex = 0;
-    document.getElementById("riyadhCities").selectedIndex = 0;
-    document.getElementById("madinahCities").selectedIndex = 0;
-    document.getElementById("qassimCities").selectedIndex = 0;
-    document.getElementById("haelCities").selectedIndex = 0;
-    document.getElementById("najranCities").selectedIndex = 0;
-    document.getElementById("jazanCities").selectedIndex = 0;
-
-    document.getElementById("taboukCities").classList.remove("d-none")
-    document.getElementById("easternCities").classList.add("d-none")
-    document.getElementById("makkahCities").classList.add("d-none")
-    document.getElementById("aseerCities").classList.add("d-none")
-    document.getElementById("riyadhCities").classList.add("d-none")
-    document.getElementById("madinahCities").classList.add("d-none")
-    document.getElementById("qassimCities").classList.add("d-none")
-    document.getElementById("haelCities").classList.add("d-none")
-    document.getElementById("najranCities").classList.add("d-none")
-    document.getElementById("jazanCities").classList.add("d-none")
-
-    document.querySelectorAll(".tabouk").forEach(showElement);
-    document.querySelectorAll(".tabouk").forEach(appendToSelectedSalons);
-
-    document.querySelectorAll(".makkah").forEach(hideElement);
-
-    document.querySelectorAll(".eastern").forEach(hideElement);
-
-    document.querySelectorAll(".aseer").forEach(hideElement);
-
-    document.querySelectorAll(".riyadh").forEach(hideElement);
-
-    document.querySelectorAll(".madinah").forEach(hideElement);
-
-    document.querySelectorAll(".qassim").forEach(hideElement);
-
-    document.querySelectorAll(".hael").forEach(hideElement);
-
-    document.querySelectorAll(".najran").forEach(hideElement);
-
-    document.querySelectorAll(".jazan").forEach(hideElement);
-
-    function hideElement(elem)
-      {
-        elem.classList.add("d-none");
-      }
-    function showElement(elem)
-      {
-          elem.classList.remove("d-none");
-      }
-      function appendToSelectedSalons(elem)
-      {
-        selectedProvinceSalons.push(elem);
-      }
-      console.log(text);
-      console.log(selectedProvinceSalons);
-    }
-  else if(text == "نجران")
-  {
-    selectedProvinceSalons = [];
-
-    document.getElementById("easternCities").selectedIndex = 0;
-    document.getElementById("makkahCities").selectedIndex = 0;
-    document.getElementById("aseerCities").selectedIndex = 0;
-    document.getElementById("riyadhCities").selectedIndex = 0;
-    document.getElementById("madinahCities").selectedIndex = 0;
-    document.getElementById("qassimCities").selectedIndex = 0;
-    document.getElementById("taboukCities").selectedIndex = 0;
-    document.getElementById("haelCities").selectedIndex = 0;
-    document.getElementById("jazanCities").selectedIndex = 0;
-
-    document.getElementById("najranCities").classList.remove("d-none")
-    document.getElementById("easternCities").classList.add("d-none")
-    document.getElementById("makkahCities").classList.add("d-none")
-    document.getElementById("aseerCities").classList.add("d-none")
-    document.getElementById("riyadhCities").classList.add("d-none")
-    document.getElementById("madinahCities").classList.add("d-none")
-    document.getElementById("qassimCities").classList.add("d-none")
-    document.getElementById("taboukCities").classList.add("d-none")
-    document.getElementById("haelCities").classList.add("d-none")
-    document.getElementById("jazanCities").classList.add("d-none")
-
-    document.querySelectorAll(".najran").forEach(showElement);
-    document.querySelectorAll(".najran").forEach(appendToSelectedSalons);
-
-    document.querySelectorAll(".makkah").forEach(hideElement);
-
-    document.querySelectorAll(".eastern").forEach(hideElement);
-
-    document.querySelectorAll(".aseer").forEach(hideElement);
-
-    document.querySelectorAll(".riyadh").forEach(hideElement);
-
-    document.querySelectorAll(".madinah").forEach(hideElement);
-
-    document.querySelectorAll(".qassim").forEach(hideElement);
-
-    document.querySelectorAll(".tabouk").forEach(hideElement);
-
-    document.querySelectorAll(".hael").forEach(hideElement);
-
-    document.querySelectorAll(".jazan").forEach(hideElement);
-
-
-    function hideElement(elem)
-      {
-        elem.classList.add("d-none");
-      }
-    function showElement(elem)
-      {
-          elem.classList.remove("d-none");
-      }
-      function appendToSelectedSalons(elem)
-      {
-        selectedProvinceSalons.push(elem);
-      }
-      console.log(text);
-      console.log(selectedProvinceSalons);
-    }
-  else if(text == "جازان")
-  {
-    selectedProvinceSalons = [];
-
-    document.getElementById("easternCities").selectedIndex = 0;
-    document.getElementById("makkahCities").selectedIndex = 0;
-    document.getElementById("aseerCities").selectedIndex = 0;
-    document.getElementById("riyadhCities").selectedIndex = 0;
-    document.getElementById("madinahCities").selectedIndex = 0;
-    document.getElementById("qassimCities").selectedIndex = 0;
-    document.getElementById("taboukCities").selectedIndex = 0;
-    document.getElementById("haelCities").selectedIndex = 0;
-    document.getElementById("najranCities").selectedIndex = 0;
-
-    document.getElementById("jazanCities").classList.remove("d-none")
-    document.getElementById("easternCities").classList.add("d-none")
-    document.getElementById("makkahCities").classList.add("d-none")
-    document.getElementById("aseerCities").classList.add("d-none")
-    document.getElementById("riyadhCities").classList.add("d-none")
-    document.getElementById("madinahCities").classList.add("d-none")
-    document.getElementById("qassimCities").classList.add("d-none")
-    document.getElementById("taboukCities").classList.add("d-none")
-    document.getElementById("haelCities").classList.add("d-none")
-    document.getElementById("najranCities").classList.add("d-none")
-
-    document.querySelectorAll(".jazan").forEach(showElement);
-    document.querySelectorAll(".jazan").forEach(appendToSelectedSalons);
-
-    document.querySelectorAll(".makkah").forEach(hideElement);
-
-    document.querySelectorAll(".eastern").forEach(hideElement);
-
-    document.querySelectorAll(".aseer").forEach(hideElement);
-
-    document.querySelectorAll(".riyadh").forEach(hideElement);
-
-    document.querySelectorAll(".madinah").forEach(hideElement);
-
-    document.querySelectorAll(".qassim").forEach(hideElement);
-
-    document.querySelectorAll(".tabouk").forEach(hideElement);
-
-    document.querySelectorAll(".hael").forEach(hideElement);
-
-    document.querySelectorAll(".najran").forEach(hideElement);
-
-
-    function hideElement(elem)
-      {
-        elem.classList.add("d-none");
-      }
-    function showElement(elem)
-      {
-          elem.classList.remove("d-none");
-      }
-      function appendToSelectedSalons(elem)
-      {
-        selectedProvinceSalons.push(elem);
-      }
-      console.log(text);
-      console.log(selectedProvinceSalons);
-    }
-  else{
-    document.getElementById("easternCities").selectedIndex = 0;
-    document.getElementById("haelCities").selectedIndex = 0;
-    document.getElementById("makkahCities").selectedIndex = 0;
-    document.getElementById("aseerCities").selectedIndex = 0;
-    document.getElementById("riyadhCities").selectedIndex = 0;
-    document.getElementById("madinahCities").selectedIndex = 0;
-    document.getElementById("qassimCities").selectedIndex = 0;
-    document.getElementById("taboukCities").selectedIndex = 0;
-    document.getElementById("najranCities").selectedIndex = 0;
-    document.getElementById("jazanCities").selectedIndex = 0;
-
-    document.getElementById("easternCities").disabled = true;
-    document.getElementById("easternCities").classList.remove("d-none")
-    document.getElementById("makkahCities").classList.add("d-none")
-    document.getElementById("haelCities").classList.add("d-none")
-    document.getElementById("aseerCities").classList.add("d-none")
-    document.getElementById("riyadhCities").classList.add("d-none")
-    document.getElementById("madinahCities").classList.add("d-none")
-    document.getElementById("qassimCities").classList.add("d-none")
-    document.getElementById("taboukCities").classList.add("d-none")
-    document.getElementById("najranCities").classList.add("d-none")
-    document.getElementById("jazanCities").classList.add("d-none")
-
-    document.querySelectorAll(".eastern").forEach(showElement);
-
-    document.querySelectorAll(".makkah").forEach(showElement);
-
-    document.querySelectorAll(".hael").forEach(showElement);
-
-    document.querySelectorAll(".aseer").forEach(showElement);
-
-    document.querySelectorAll(".riyadh").forEach(showElement);
-
-    document.querySelectorAll(".madinah").forEach(showElement);
-
-    document.querySelectorAll(".qassim").forEach(showElement);
-
-    document.querySelectorAll(".tabouk").forEach(showElement);
-
-    document.querySelectorAll(".najran").forEach(showElement);
-
-    document.querySelectorAll(".jazan").forEach(showElement);
-
-    function showElement(elem)
-      {
-          elem.classList.remove("d-none");
-      }
-    console.log(text)
-  }
-}
-
-function cityFilter(e)
-{
-  let selectedCity = document.getElementById("easternSelected");
-
-  console.log("target id: "+e.target.id);
-
-  if(e.target.id == "haelCities")
-  {
-    selectedCity = document.getElementById("haelCities");
-  }
-  else if(e.target.id == "easternCities")
-  {
-    selectedCity = document.getElementById("easternCities");
-  }
-  else if(e.target.id == "riyadhCities")
-  {
-    selectedCity = document.getElementById("riyadhCities");
-  }
-  else if(e.target.id == "makkahCities")
-  {
-    selectedCity = document.getElementById("makkahCities");
-  }
-  else if(e.target.id == "najranCities")
-  {
-    selectedCity = document.getElementById("najranCities");
-  }
-  else if(e.target.id == "aseerCities")
-  {
-    selectedCity = document.getElementById("aseerCities");
-  }
-  else if(e.target.id == "abhaCities")
-  {
-    selectedCity = document.getElementById("abhaCities");
-  }
-  // else if(e.target.id == "joufCities")
-  // {
-  //   selectedCity = document.getElementById("joufCities");
-  // }
-  // else if(e.target.id == "northernBordersCities")
-  // {
-  //   selectedCity = document.getElementById("northernBordersCities");
-  // }
-  else if(e.target.id == "madinahCities")
-  {
-    selectedCity = document.getElementById("madinahCities");
-  }
-  else if(e.target.id == "jazanCities")
-  {
-    selectedCity = document.getElementById("jazanCities");
-  }
-  else if(e.target.id == "qassimCities")
-  {
-    selectedCity = document.getElementById("qassimCities");
-  }
-  else if(e.target.id == "taboukCities")
-  {
-    selectedCity = document.getElementById("taboukCities");
-  }
-  else if(e.target.id == "najranCities")
-  {
-    selectedCity = document.getElementById("najranCities");
-  }
-  console.log(selectedCity);
-  let cityValue = selectedCity.options[selectedCity.selectedIndex].value;// get selected option value
-  let cityText = selectedCity.options[selectedCity.selectedIndex].text;
-
-  console.log(cityText+" is selected...");
-
-  // Eastern Province Cities
-  if(cityText == "الظهران")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('الظهران'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('الظهران'))
-      {
-        item.classList.remove("d-none");
-      }
     });
-  }
-  else if(cityText == "الخبر")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('الخبر'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('الخبر'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "الدمام")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('الدمام'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('الدمام'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "الجبيل")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('الجبيل'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('الجبيل'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-
-  else if(cityText == "الأحساء")
-  {
-  
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('الأحساء'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('الأحساء'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "القطيف")
-  {
-  
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('القطيف'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('القطيف'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "حفر الباطن")
-  {
-  
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('حفرالباطن'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('حفرالباطن'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "الخفجي")
-  {
-  
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('الخفجي'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('الخفجي'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "النعيرية")
-  {
-  
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('النعيرية'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('النعيرية'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-
-//Hael Province Cities
-if(cityText == "مدينة حائل")
-{
-
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('مدينة حائل'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('مدينة حائل'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-} 
-else if(cityText == "بقعاء")
-{
-
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('بقعاء'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('بقعاء'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "قفار")
-{
-
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('قفار'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('قفار'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الغزالة")
-{
-
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الغزالة'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الغزالة'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الشنان")
-{
-
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الشنان'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الشنان'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "موقق")
-{
-
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('موقق'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('موقق'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الحائط")
-{
-
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الحائط'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الحائط'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "السليمي")
-{
-
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('السليمي'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('السليمي'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الشملي")
-{
-
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الشملي'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الشملي'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "سميراء")
-{
-
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('سميراء'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('سميراء'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الحليفة")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الحليفة'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الحليفة'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "جبة")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('جبة'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('جبة'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-
-// Makkah cities
-else if(cityText == "الطائف")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الطائف'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الطائف'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "جدة")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('جدة'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('جدة'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "مكة المكرمة")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('مكة المكرمة'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('مكة المكرمة'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "رابغ")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('رابغ'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('رابغ'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "القنفذة")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('القنفذة'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('القنفذة'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الليث")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الليث'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الليث'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "خليص")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('خليص'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('خليص'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-
-// Riyadh Cities
-else if(cityText == "شمال الرياض")
-  {
-    console.log("added شمال الرياض");
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('شمالالرياض'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('شمالالرياض'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "جنوب الرياض")
-  {
-    console.log("add جنوبالرياض");
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('جنوبالرياض'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('جنوبالرياض'))
-      {
-        console.log("contains جنوب الرياض");
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "شرق الرياض")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('شرقالرياض'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('شرقالرياض'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "غرب الرياض")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('غربالرياض'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('غربالرياض'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  
-  // Aseer Cities
-  else if(cityText == "أبها")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('أبها'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('أبها'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "خميس مشيط")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('خميسمشيط'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('خميسمشيط'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "النماص")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('النماص'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('النماص'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "تنومة")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('تنومة'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('تنومة'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "رجال ألمع")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('رجالألمع'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('رجالألمع'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "ظهران الجنوب")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('ظهرانالجنوب'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('ظهرانالجنوب'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-
-  // Madinah Cities
-  else if(cityText == "الحناكية")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('الحناكية'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('الحناكية'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "العلا")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('العلا'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('العلا'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "ينبع")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('ينبع'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('ينبع'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "ينبع الصناعية")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('ينبعالصناعية'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('ينبعالصناعية'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "المدينة المنورة")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('المدينةالمنورة'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('المدينةالمنورة'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-
-  // Qassim Cities
-  else if(cityText == "عنيزة")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('عنيزة'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('عنيزة'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "بريدة")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('بريدة'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('بريدة'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "البكيرية")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('البكيرية'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('البكيرية'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "ضرية")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('ضرية'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('ضرية'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "المذنب")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('المذنب'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('المذنب'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "عيون الجواء")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('عيونالجواء'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('عيونالجواء'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "رياض الخبراء")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('رياضالخبراء'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('رياضالخبراء'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "عقلة الصقور")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('عقلةالصقور'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('عقلةالصقور'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "الأسياح")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('الأسياح'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('الأسياح'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "النبهانية")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('النبهانية'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('النبهانية'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "الرس")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('الرس'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('الرس'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "الشماسية")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('الشماسية'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('الشماسية'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-  else if(cityText == "البدائع")
-  {
-    selectedProvinceSalons.forEach(function(item){
-      if (!item.classList.contains('البدائع'))
-      {
-        item.classList.add("d-none");
-      }
-      if (item.classList.contains('البدائع'))
-      {
-        item.classList.remove("d-none");
-      }
-    });
-  }
-
-// Tabouk Cities
-else if(cityText == "أملج")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('أملج'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('أملج'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الوجه")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الوجه'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الوجه'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "تيماء")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('تيماء'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('تيماء'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "ضباء")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('ضباء'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('ضباء'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "حقل")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('حقل'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('حقل'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "البدع")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('البدع'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('البدع'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-// Najran Cities
-else if(cityText == "رجلا")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('رجلا'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('رجلا'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "المشعلية")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('المشعلية'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('المشعلية'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "حي الفيصلية")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('حيالفيصلية'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('حيالفيصلية'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "حي الفهد")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('حيالفهد'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('حيالفهد'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "سقام")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('سقام'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('سقام'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الغويلا")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الغويلا'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الغويلا'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الجربة")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الجربة'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الجربة'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الجربة")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الجربة'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الجربة'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الصفا")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الصفا'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الصفا'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الشرفة")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الشرفة'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الشرفة'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "القابل")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('القابل'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('القابل'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "العريسة")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('العريسة'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('العريسة'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "حي الأسكان")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('حيالأسكان'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('حيالأسكان'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "شرق المطار")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('شرقالمطار'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('شرقالمطار'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "يدمة")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('يدمة'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('يدمة'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "حبونا")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('حبونا'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('حبونا'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "نجران البلد")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('نجرانالبلد'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('نجرانالبلد'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-
-// Jazan Cities
-else if(cityText == "صبيا")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('صبيا'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('صبيا'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "صامطة")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('صامطة'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('صامطة'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "أبو عريش")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('أبوعريش'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('أبوعريش'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "جازان")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('جازان'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('جازان'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "أحد مسارحة")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('أحدمسارحة'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('أحدمسارحة'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "بيش")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('بيش'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('بيش'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "العارضة")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('العارضة'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('العارضة'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "ضمد")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('ضمد'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('ضمد'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الدرب")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الدرب'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الدرب'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "العيدابي")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('العيدابي'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('العيدابي'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الدائر")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الدائر'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الدائر'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الريث")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الريث'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الريث'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الحرث")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الحرث'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الحرث'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "فرسان")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('فرسان'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('فرسان'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "الطوال")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('الطوال'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('الطوال'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "هروب")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('هروب'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('هروب'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-else if(cityText == "فيفاء")
-{
-  selectedProvinceSalons.forEach(function(item){
-    if (!item.classList.contains('فيفاء'))
-    {
-      item.classList.add("d-none");
-    }
-    if (item.classList.contains('فيفاء'))
-    {
-      item.classList.remove("d-none");
-    }
-  });
-}
-
-// If no city selected
-  else if(cityText == "المدينة / الحي")
-  {
-  selectedProvinceSalons.forEach(function(item){
-      item.classList.remove("d-none");
-    });
-  }
-}
-
-document.getElementById("salonLoginOrRegisterButton").addEventListener("click", function(){
-  Swal.fire({
-    title: '',
-    icon: '',
-    iconHtml: '',
-    confirmButtonText: 'Create Account',
-    cancelButtonText: 'Login',
-    showCancelButton: true,
-    showCloseButton: true
-  })
-  document.querySelector(".swal2-confirm").addEventListener('click', function(){
-    window.location.assign("signup.html")
-  });
-  document.querySelector(".swal2-cancel").addEventListener('click', function(){
-    window.location.assign("signin.html")
-  });
-});
-
-
-// document.querySelector(".signup").addEventListener("click", function(){
-//   document.querySelector(".signup").classList.add("dim");
-//   setTimeout(function(){document.querySelector(".signup").classList.remove("dim");}, 150);
-// });
-
-
-// document.querySelector(".search").addEventListener("click", function(){
-//   window.location.href = "http://stackoverflow.com";
-//   console.log("search button clicked");
-// });
+  </script>
+</html>
