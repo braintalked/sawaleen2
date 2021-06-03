@@ -24,6 +24,7 @@ console.log("inside getSaloonProfiles.js file")
           loader.classList.add("hidden");
         } else {
             // doc.data() will be undefined in this case
+            loader.classList.add("hidden");
             console.log("No such document!");
         }
     }).catch((error) => {
