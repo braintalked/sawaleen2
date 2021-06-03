@@ -25,6 +25,7 @@ console.log("inside getSaloonProfiles.js file")
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
+            loader.classList.add("hidden");
         }
     }).catch((error) => {
         console.log("Error getting document:", error);
